@@ -1,0 +1,735 @@
+@import url(http://fonts.googleapis.com/css?family=Share+Tech+Mono);
+@import url(http://fonts.googleapis.com/css?family=Holtwood+One+SC);
+@import url(http://fonts.googleapis.com/css?family=Righteous);
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /*font-family: 'Kreon', serif;*/
+    font-family: 'Share Tech Mono';
+    background-color: #eeeeee;
+}
+
+#header {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    /*font-size: 40px;*/
+}
+
+#content {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 5px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    /*font-size: 40px;*/
+}
+
+#header_left {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 30%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    font-size: 50px;
+    /*font-family: 'Holtwood One SC', serif;*/
+    font-family: 'Righteous', cursive;
+
+}
+
+#header_right {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: right;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 70%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 40px;*/
+}
+
+#list_container {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 25%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 40px;*/
+}
+
+.list_item {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100px;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 40px;*/
+}
+
+.item_name {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 25%;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    font-weight: bold;
+    text-decoration: underline;
+    /*font-size: 40px;*/
+}
+
+.item_address {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 25%;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 40px;*/
+}
+
+.item_phone {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 25%;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 40px;*/
+}
+
+.item_email {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 25%;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 40px;*/
+}
+
+#item_details_1 {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 25%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 40px;*/
+}
+
+#item_details_2 {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 25%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 40px;*/
+}
+
+#item_details_3 {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 25%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 40px;*/
+}
+
+.item_rating {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: right;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 30%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 40px;*/
+}
+
+.review_count {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: right;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 30%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 40px;*/
+}
+
+.summary {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    /*font-size: 40px;*/
+}
+
+canvas {
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.review_item {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 40px;*/
+}
+
+.review_number {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 10%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 20px;*/
+}
+
+.review_title {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 70%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 20px;*/
+}
+
+.review_date {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 20%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 20px;*/
+}
+
+.review_details {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 600px;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 20px;*/
+}
+
+.review_text {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 20px;*/
+}
+
+.pros_title {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    font-weight: bold;
+    /*font-size: 20px;*/
+}
+
+.cons_title {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    font-weight: bold;
+    /*font-size: 20px;*/
+}
+
+.review_author {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 20px;*/
+
+}
+
+.author_underline {
+    text-decoration: underline;
+}
+
+.grades_summary {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 200px;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    /*font-size: 20px;*/
+}
+
+.final_rating {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 50px;
+}
