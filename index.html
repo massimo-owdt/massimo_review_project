@@ -22,6 +22,7 @@
 
 <div id="content">
     <div id="list_container">
+<!--
         <div class="list_item">
             <div class="item_name"><span>Sticker Station LLC</span>
                 <div class="item_rating">
@@ -102,6 +103,7 @@
         </div>
 
 
+-->
     </div>
     <div id="item_details_1">
         <div class="summary">OVERALL PERFORMANCE</div>
@@ -181,7 +183,22 @@
 </div>
 
 
-
+<!--UNDERSCORE TEMPLATES-->
+<script type="text/template" id="single_item_template">
+    <div class="list_item">
+        <div class="item_name"><span><%= item_name %></span>
+            <div class="item_rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div></div>
+        <div class="item_address"><%= item_address %><div class="review_count">(<%= item_review_count %>) reviews</div></div>
+        <div class="item_phone"><%= item_phone %></div>
+        <div class="item_email"><%= item_email %></div>
+    </div>
+</script>
 
 
 
@@ -317,6 +334,8 @@
      ctx3.translate();*/
 </script>
 <script src="app.js"></script>
+
+
 
 </body>
 </html>
