@@ -106,6 +106,10 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
     },
     loadDetails: function(){
         console.log('I have been clicked');
+        myapp.my_objects.views.Details_1 = new myapp.my_constructors.views.ItemDetail_1({
+            el: '#item_details_1',
+            model: this.model
+        });
     }
 });
 
@@ -123,6 +127,20 @@ myapp.my_constructors.views.ListItemContainer = Backbone.View.extend({
         }, this);
     }
 });
+
+myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
+    initialize: function(){
+        console.log('Item detail 1 view has been initialized');
+        this.render();
+    },
+    template: _.template($("#details_1_template").html()),
+    render: function(){
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    }
+});
+
+
 
 
 
@@ -161,15 +179,21 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         console.log('kkkkkk');
 
         var i1 = new myapp.my_constructors.models.Item({
+            item_rating: 80,
             item_review_count: 200,
             item_phone: '666 666 66 66'
         });
         var i2 = new myapp.my_constructors.models.Item();
         var i3 = new myapp.my_constructors.models.Item({
+            item_rating: 20,
             item_phone: '999 999 99 99'
         });
-        var i4 = new myapp.my_constructors.models.Item();
-        var i5 = new myapp.my_constructors.models.Item();
+        var i4 = new myapp.my_constructors.models.Item({
+            item_rating: 50
+        });
+        var i5 = new myapp.my_constructors.models.Item({
+            item_rating: 46
+        });
 
         myapp.my_objects.collections.collec = new myapp.my_constructors.collections.ItemsCollection();
         myapp.my_objects.collections.collec.add(i1);
