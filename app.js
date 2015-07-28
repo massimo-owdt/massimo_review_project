@@ -60,6 +60,13 @@ myapp.my_constructors.collections.ItemsCollection = Backbone.Collection.extend({
     }
 });
 
+myapp.my_constructors.collections.ReviewsCollection = Backbone.Collection.extend({
+    model: myapp.my_constructors.models.Review,
+    initialize: function(){
+        console.log('A new review collection has been initialized');
+    }
+});
+
 
 
 
@@ -143,6 +150,8 @@ myapp.my_constructors.views.ListItemContainer = Backbone.View.extend({
 myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
     initialize: function(){
         console.log('Item detail 1 view has been initialized');
+
+        /*setTimeout(this.render(), 3000);*/
         this.render();
     },
     template: _.template($("#details_1_template").html()),
@@ -161,6 +170,16 @@ myapp.my_constructors.views.SmallReview = Backbone.View.extend({
     render: function(){
         this.$el.html(this.template(this.model.toJSON()));
         return this;
+    },
+    events: {
+        'click .review_title': 'loadDetails'
+    },
+    loadDetails: function(){
+        console.log('I have been clicked');
+        myapp.my_objects.views.Details_3 = new myapp.my_constructors.views.ItemDetail_3({
+            el: '#item_details_3',
+            model: this.model
+        });
     }
 });
 
@@ -175,6 +194,18 @@ myapp.my_constructors.views.ReviewListContainer = Backbone.View.extend({
             var SmallReviewView = new myapp.my_constructors.views.SmallReview({model: item});
             this.$el.append(SmallReviewView.render().el);
         }, this);
+    }
+});
+
+myapp.my_constructors.views.ItemDetail_3 = Backbone.View.extend({
+    initialize: function(){
+        console.log('Item detail 3 view has been initialized');
+        this.render();
+    },
+    template: _.template($("#big_review_template").html()),
+    render: function(){
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
     }
 });
 
@@ -249,9 +280,38 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
 
 
         console.log('ooooooo');
-
         var r = new myapp.my_constructors.models.Review();
         console.log(r);
+
+
+
+        myapp.my_objects.collections.reviews = new myapp.my_constructors.collections.ReviewsCollection();
+        var r1 = new myapp.my_constructors.models.Review();
+        var r2 = new myapp.my_constructors.models.Review();
+        var r3 = new myapp.my_constructors.models.Review();
+        var r4 = new myapp.my_constructors.models.Review({
+            review_author: 'Massimo Penzo',
+            review_cons: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+        });
+        var r5 = new myapp.my_constructors.models.Review({
+            review_number: 2222,
+            review_cons: 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
+        });
+        var r6 = new myapp.my_constructors.models.Review();
+        myapp.my_objects.collections.reviews.add(r1);
+        myapp.my_objects.collections.reviews.add(r2);
+        myapp.my_objects.collections.reviews.add(r3);
+        myapp.my_objects.collections.reviews.add(r4);
+        myapp.my_objects.collections.reviews.add(r5);
+        myapp.my_objects.collections.reviews.add(r6);
+
+        var vi2 = new myapp.my_constructors.views.ReviewListContainer({
+            el: '#item_details_2',
+            collection: myapp.my_objects.collections.reviews
+        });
+
+
+
 
     }
 

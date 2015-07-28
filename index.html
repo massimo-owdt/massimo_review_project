@@ -31,71 +31,9 @@
     </div>
     <div id="item_details_2">
         <div class="summary">REVIEWS</div>
-        <div class="review_item">
-            <div class="review_number">1.</div>
-            <div class="review_title">The worst service in the world...</div>
-            <div class="review_date">07/15/2025</div>
-        </div>
-        <div class="review_item">
-            <div class="review_number">1.</div>
-            <div class="review_title">The worst service in the world...</div>
-            <div class="review_date">07/15/2025</div>
-        </div>
-        <div class="review_item">
-            <div class="review_number">1.</div>
-            <div class="review_title">The worst service in the world...</div>
-            <div class="review_date">07/15/2025</div>
-        </div>
-        <div class="review_item">
-            <div class="review_number">1.</div>
-            <div class="review_title">The worst service in the world...</div>
-            <div class="review_date">07/15/2025</div>
-        </div>
-        <div class="review_item">
-            <div class="review_number">1.</div>
-            <div class="review_title">The worst service in the world...</div>
-            <div class="review_date">07/15/2025</div>
-        </div>
-        <div class="review_item">
-            <div class="review_number">1.</div>
-            <div class="review_title">The worst service in the world...</div>
-            <div class="review_date">07/15/2025</div>
-        </div>
-        <div class="review_item">
-            <div class="review_number">1.</div>
-            <div class="review_title">The worst service in the world...</div>
-            <div class="review_date">07/15/2025</div>
-        </div>
-        <div class="review_item">
-            <div class="review_number">1.</div>
-            <div class="review_title">The worst service in the world...</div>
-            <div class="review_date">07/15/2025</div>
-        </div>
-        <div class="review_item">
-            <div class="review_number">1.</div>
-            <div class="review_title">The worst service in the world...</div>
-            <div class="review_date">07/15/2025</div>
-        </div>
-
     </div>
     <div id="item_details_3">
         <div class="summary">REVIEW DETAILS</div>
-        <div class="review_author"><span class="author_underline">Written by:</span>Massimo Penzo</div>
-        <div class="review_details">
-            <div class="pros_title">PROS:</div>
-            <div class="review_text">
-                Lorem ipsum dolor sit amet, mazim maiorum ponderum no sea, pro eu nullam invenire. Aliquid copiosae reformidans te quo, duo aperiri accusam et. Per cu verear indoctum, te his diam quot, everti diceret pro eu. At malis persius efficiendi mei.
-                Sed ei timeam aeterno. In soleat recusabo cotidieque mea. Mea ei praesent temporibus, pri an petentium sapientem. Pro in sale probatus definitiones, ne qui impetus accumsan scribentur. Ne dicit posidonium quo, sumo ullamcorper definitiones ea mea, cu sea quot doming sanctus.
-            </div>
-            <div class="cons_title">CONS:</div>
-            <div class="review_text">
-                Lorem ipsum dolor sit amet, mazim maiorum ponderum no sea, pro eu nullam invenire. Aliquid copiosae reformidans te quo, duo aperiri accusam et. Per cu verear indoctum, te his diam quot, everti diceret pro eu. At malis persius efficiendi mei.
-                Sed ei timeam aeterno. In soleat recusabo cotidieque mea. Mea ei praesent temporibus, pri an petentium sapientem. Pro in sale probatus definitiones, ne qui impetus accumsan scribentur. Ne dicit posidonium quo, sumo ullamcorper definitiones ea mea, cu sea quot doming sanctus.
-            </div>
-            <div class="grades_summary">
-                <canvas id="myChart3" width="500" height="200"></canvas>
-            </div>
-        </div>
     </div>
 
 </div>
@@ -105,7 +43,7 @@
 <script type="text/template" id="single_item_template">
     <div class="list_item">
         <div class="item_name"><span><%= item_name %></span>
-            <div class="item_rating">
+            <div class="item_rating animated fadeIn">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
@@ -127,9 +65,25 @@
 
 <script type="text/template" id="small_review_template">
     <div class="review_item">
-        <div class="review_number">1.</div>
-        <div class="review_title">The worst service in the world...</div>
-        <div class="review_date">07/15/2025</div>
+        <div class="review_number"><%= review_number %></div>
+        <div class="review_title"><%= review_title %></div>
+        <div class="review_date"><%= review_date %></div>
+    </div>
+</script>
+
+
+<script type="text/template" id="big_review_template">
+    <div class="animated fadeIn">
+        <div class="review_author"><span class="author_underline">Written by: </span><%= review_author %></div>
+        <div class="review_details">
+            <div class="pros_title">PROS:</div>
+            <div class="review_text"><%= review_pros %></div>
+            <div class="cons_title">CONS:</div>
+            <div class="review_text"><%= review_cons %></div>
+            <div class="grades_summary">
+                <canvas id="myChart3" width="500" height="200"></canvas>
+            </div>
+        </div>
     </div>
 </script>
 
