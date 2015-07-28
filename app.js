@@ -2,8 +2,7 @@
  * Created by massimo on 7/27/15.
  */
 
-
-/*defining namespace for the app*/
+/*NAMESPACE DEFINITION*/
 var myapp = {
     my_constructors: {
         models: {},
@@ -20,10 +19,7 @@ var myapp = {
 };
 
 
-console.log('backbone');
-
-
-/*models constructors*/
+/*MODELS*/
 myapp.my_constructors.models.Item = Backbone.Model.extend({
     initialize: function(){
         console.log('A new item has been created');
@@ -38,8 +34,24 @@ myapp.my_constructors.models.Item = Backbone.Model.extend({
     }
 });
 
+myapp.my_constructors.models.Review = Backbone.Model.extend({
+    initialize: function(){
+        console.log('A new Review object has been created');
+    },
+    defaults: {
+        review_number: 6666,
+        review_title: 'Default Title',
+        review_date: '00/00/0000',
+        review_author: 'Francois Voltaire',
+        review_pros: 'Default Pros',
+        review_cons: 'Defualt Cons'
+    }
+});
 
-/*collections constructors*/
+
+
+
+/*COLLECTIONS*/
 myapp.my_constructors.collections.ItemsCollection = Backbone.Collection.extend({
     model: myapp.my_constructors.models.Item,
     initialize: function(){
@@ -49,7 +61,9 @@ myapp.my_constructors.collections.ItemsCollection = Backbone.Collection.extend({
 });
 
 
-/*views constructors*/
+
+
+/*VIEWS*/
 myapp.my_constructors.views.Menu1 = Backbone.View.extend({
     initialize: function(){
         this.render();
@@ -90,7 +104,6 @@ myapp.my_constructors.views.Menu4 = Backbone.View.extend({
     }
 });
 
-/*SINGLE ITEM TEMPLATE*/
 myapp.my_constructors.views.SingleItem = Backbone.View.extend({
     initialize: function(){
         console.log('Single Item view initialized');
@@ -112,7 +125,6 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
         });
     }
 });
-
 
 myapp.my_constructors.views.ListItemContainer = Backbone.View.extend({
     initialize: function(){
@@ -140,11 +152,36 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
     }
 });
 
+myapp.my_constructors.views.SmallReview = Backbone.View.extend({
+    initialize: function(){
+        console.log('A small review view has been initialized');
+        this.render();
+    },
+    template: _.template($("#small_review_template").html()),
+    render: function(){
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    }
+});
+
+myapp.my_constructors.views.ReviewListContainer = Backbone.View.extend({
+    initialize: function(){
+        console.log('Review List Item Container View initialized');
+        this.render();
+    },
+    render: function(){
+        _.each(this.collection.models, function(item){
+            console.log(item.toJSON());
+            var SmallReviewView = new myapp.my_constructors.views.SmallReview({model: item});
+            this.$el.append(SmallReviewView.render().el);
+        }, this);
+    }
+});
 
 
 
 
-/*router*/
+/*ROUTER*/
 myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
     routes: {
         "menu1": "menu1Handler",
@@ -212,6 +249,10 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
 
 
         console.log('ooooooo');
+
+        var r = new myapp.my_constructors.models.Review();
+        console.log(r);
+
     }
 
 
