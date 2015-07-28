@@ -1,0 +1,78 @@
+/*body {
+    background-color: #333;
+}*/
+.loader-wrapper {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    /*border: 1px dotted #000000;*/
+}
+.loader  {
+    animation: rotate 1s infinite;
+    height: 50px;
+    width: 50px;
+    /*border: 1px dotted #000000;*/
+}
+
+.loader:before,
+.loader:after {
+    border-radius: 50%;
+    content: '';
+    display: block;
+    height: 20px;
+    width: 20px;
+}
+.loader:before {
+    animation: ball1 1s infinite;
+    background-color: #fb2e45;
+    box-shadow: 30px 0 0 #3c0b10;
+    margin-bottom: 10px;
+}
+.loader:after {
+    animation: ball2 1s infinite;
+    background-color: #fb2e45;
+    box-shadow: 30px 0 0 #3c0b10;
+}
+
+@keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg) sacale(0.8);
+    }
+    50% {
+        -webkit-transform: rotate(360deg) scale(1.2);
+    }
+    100% {
+        -webkit-transform: rotate(720deg) scale(0.8);
+    }
+}
+
+@keyframes ball1 {
+    0% {
+        box-shadow: 30px 0 0 #fb2e45;
+    }
+    50% {
+        box-shadow: 0 0 0 #fb2e45;
+        margin-bottom: 0;
+        -webkit-transform: translate(15px,15px);
+    }
+    100% {
+        box-shadow: 30px 0 0 #fb2e45;
+        margin-bottom: 10px;
+    }
+}
+
+@keyframes ball2 {
+    0% {
+        box-shadow: 30px 0 0 #fb2e45;
+    }
+    50% {
+        box-shadow: 0 0 0 #fb2e45;
+        margin-top: -20px;
+        -webkit-transform: translate(15px,15px);
+    }
+    100% {
+        box-shadow: 30px 0 0 #fb2e45;
+        margin-top: 0;
+    }
+}

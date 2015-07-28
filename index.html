@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="bower_components/animate.css/animate.min.css"/>
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="bower_components/Simple-Grid/simplegrid.css"/>
+    <link rel="stylesheet" href="css3_spinner/spinner.css"/>
     <title>reviews</title>
 </head>
 <body>
@@ -22,12 +23,16 @@
 </div>
 
 <div id="content">
-    <div id="list_container"></div>
+    <div id="list_container">
+
+    </div>
     <div id="item_details_1">
-        <div class="summary">OVERALL PERFORMANCE</div>
+        <!--<div class="summary">OVERALL PERFORMANCE</div>
         <div class="final_rating">4.5</div>
+
         <canvas id="myChart" width="500" height="500"></canvas>
         <canvas id="myChart2" width="500" height="250"></canvas>
+-->
     </div>
     <div id="item_details_2">
         <div class="summary">REVIEWS</div>
@@ -57,13 +62,21 @@
 </script>
 
 <script type="text/template" id="details_1_template">
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
     <div class="summary">OVERALL PERFORMANCE</div>
     <div class="final_rating"><%= item_rating %></div>
     <!--<canvas id="myChart" width="500" height="500"></canvas>
     <canvas id="myChart2" width="500" height="250"></canvas>-->
+
+
 </script>
 
 <script type="text/template" id="small_review_template">
+    <div class="loader-wrapper">
+        <div class="loader"></div>
+    </div>
     <div class="review_item">
         <div class="review_number"><%= review_number %></div>
         <div class="review_title"><%= review_title %></div>
@@ -86,6 +99,8 @@
         </div>
     </div>
 </script>
+
+<!--CSS3 SPINNER-->
 
 
 

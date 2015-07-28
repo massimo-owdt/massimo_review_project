@@ -126,6 +126,7 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
     },
     loadDetails: function(){
         console.log('I have been clicked');
+
         myapp.my_objects.views.Details_1 = new myapp.my_constructors.views.ItemDetail_1({
             el: '#item_details_1',
             model: this.model
@@ -156,8 +157,22 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
     },
     template: _.template($("#details_1_template").html()),
     render: function(){
+        this.showLoader();
         this.$el.html(this.template(this.model.toJSON()));
         return this;
+    },
+    showLoader: function(){
+        console.log('the loader...');
+        $('.loader').css({
+            "display":"block"
+        });
+        setTimeout(function(){
+            $('.loader').css({
+                "display":"none"
+            });
+        }, 1000);
+
+
     }
 });
 
