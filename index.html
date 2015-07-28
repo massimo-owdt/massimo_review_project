@@ -23,16 +23,13 @@
 </div>
 
 <div id="content">
-    <div id="list_container">
-
-    </div>
+    <div id="list_container"></div>
     <div id="item_details_1">
-        <!--<div class="summary">OVERALL PERFORMANCE</div>
+        <div class="summary">OVERALL PERFORMANCE</div>
         <div class="final_rating">4.5</div>
 
         <canvas id="myChart" width="500" height="500"></canvas>
         <canvas id="myChart2" width="500" height="250"></canvas>
--->
     </div>
     <div id="item_details_2">
         <div class="summary">REVIEWS</div>
@@ -75,7 +72,7 @@
 
 <script type="text/template" id="small_review_template">
     <div class="loader-wrapper">
-        <div class="loader"></div>
+        <div class="loader" style="display: none"></div>
     </div>
     <div class="review_item">
         <div class="review_number"><%= review_number %></div>
