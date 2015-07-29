@@ -49,6 +49,10 @@ myapp.my_constructors.models.Review = Backbone.Model.extend({
 });
 
 
+/*REST SERVICE TEST MODEL*/
+myapp.my_constructors.models.WPPost = Backbone.Model.extend({});
+
+
 
 
 /*COLLECTIONS*/
@@ -67,7 +71,11 @@ myapp.my_constructors.collections.ReviewsCollection = Backbone.Collection.extend
     }
 });
 
-
+/*REST SERVICE TEST COLLECTION*/
+myapp.my_constructors.collections.PostsColl = Backbone.Collection.extend({
+    model: myapp.my_constructors.models.WPPost,
+    url: 'http://eda.owdt.com/wordpress_1/wp-json/posts?type[]=movies'
+});
 
 
 /*VIEWS*/
@@ -326,12 +334,24 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         });
 
 
+        var rest = new myapp.my_constructors.collections.PostsColl();
+
+        rest.fetch({
+            success: function(){
+                console.log('SUCCESS!!');
+            },
+            error: function(){
+                console.log('ERROR!!');
+            }
+        });
+        console.log(rest);
+
+
+
+
 
 
     }
-
-
-
 });
 
 myapp.my_objects.router.APPRouter = new myapp.my_constructors.router.AppRouter;

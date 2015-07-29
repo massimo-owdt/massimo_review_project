@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="styles.css"/>
     <link rel="stylesheet" href="bower_components/animate.css/animate.min.css"/>
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="bower_components/Simple-Grid/simplegrid.css"/>
     <link rel="stylesheet" href="css3_spinner/spinner.css"/>
     <title>reviews</title>
 </head>
@@ -97,14 +96,15 @@
     </div>
 </script>
 
-<!--CSS3 SPINNER-->
-
 
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/underscore/underscore-min.js"></script>
 <script src="bower_components/backbone/backbone.js"></script>
 <script src="bower_components/Chart.js/Chart.min.js"></script>
+<script src="bower_components/backbone-oauth-1.0a/sha1.js"></script>
+<script src="bower_components/backbone-oauth-1.0a/backbone-oauth.js"></script>
+
 <script>
     var data = {
         labels: ["PRICE", "QUALITY", "RESPONSIVENESS", "PUNCTUALITY", "DESIGN", "ORGANIZATION", "COLOR"],
@@ -135,7 +135,6 @@
     var ctx = document.getElementById("myChart").getContext("2d");
     var myRadarChart = new Chart(ctx).Radar(data);
 </script>
-
 <script>
     var data2 = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
@@ -233,7 +232,7 @@
      ctx3.translate();*/
 </script>
 <script src="app.js"></script>
-
+<script src="oauth1.js"></script>
 
 
 </body>

@@ -20,6 +20,7 @@
     "animate.css": "daneden/animate.css#~3.3.0",
     "font-awesome": "FortAwesome/Font-Awesome#~4.3.0",
     "Chart.js": "nnnick/Chart.js#~1.0.2",
-    "Simple-Grid": "ThisIsDallas/Simple-Grid"
+    "Simple-Grid": "ThisIsDallas/Simple-Grid",
+    "backbone-oauth-1.0a": "amoshg/backbone-oauth-1.0a#~0.7.0"
   }
 }
