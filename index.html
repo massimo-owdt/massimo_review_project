@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="bower_components/animate.css/animate.min.css"/>
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="css3_spinner/spinner.css"/>
+    <link rel="stylesheet" href="bower_components/nprogress/nprogress.css"/>
     <title>reviews</title>
 </head>
 <body>
@@ -22,13 +23,11 @@
 </div>
 
 <div id="content">
-    <div id="list_container"></div>
+    <div id="list_container">
+        <div class="summary">CLIENTS</div>
+    </div>
     <div id="item_details_1">
         <div class="summary">OVERALL PERFORMANCE</div>
-        <!--<div class="final_rating">4.5</div>
-
-        <canvas id="myChart" width="500" height="500"></canvas>
-        <canvas id="myChart2" width="500" height="250"></canvas>-->
     </div>
     <div id="item_details_2">
         <div class="summary">REVIEWS</div>
@@ -58,21 +57,15 @@
 </script>
 
 <script type="text/template" id="details_1_template">
-    <div class="loader-wrapper">
-        <div class="loader"></div>
+    <div class="animated fadeIn">
+        <div class="summary">OVERALL PERFORMANCE</div>
+        <div class="final_rating animated flash"><%= item_rating %></div>
+        <canvas id="myChart" width="500" height="500"></canvas>
+        <canvas id="myChart2" width="500" height="250"></canvas>
     </div>
-    <div class="summary">OVERALL PERFORMANCE</div>
-    <div class="final_rating"><%= item_rating %></div>
-    <canvas id="myChart" width="500" height="500"></canvas>
-    <canvas id="myChart2" width="500" height="250"></canvas>
-
-
 </script>
 
 <script type="text/template" id="small_review_template">
-    <div class="loader-wrapper">
-        <div class="loader" style="display: none"></div>
-    </div>
     <div class="review_item">
         <div class="review_number"><%= review_number %></div>
         <div class="review_title"><%= review_title %></div>
@@ -82,9 +75,7 @@
 
 
 <script type="text/template" id="big_review_template">
-    <div class="loader-wrapper">
-        <div class="loader" style="display: none"></div>
-    </div>
+    <div class="summary">REVIEW DETAILS</div>
     <div class="animated fadeIn">
         <div class="review_author"><span class="author_underline">Written by: </span><%= review_author %></div>
         <div class="review_details">
@@ -92,9 +83,9 @@
             <div class="review_text"><%= review_pros %></div>
             <div class="cons_title">CONS:</div>
             <div class="review_text"><%= review_cons %></div>
-            <!--<div class="grades_summary">
-                <canvas id="myChart3" width="500" height="200"></canvas>
-            </div>-->
+            <div class="grades_summary">
+                <canvas id="myChart3" width="500" height="250"></canvas>
+            </div>
         </div>
     </div>
 </script>
@@ -105,42 +96,10 @@
 <script src="bower_components/underscore/underscore-min.js"></script>
 <script src="bower_components/backbone/backbone.js"></script>
 <script src="bower_components/Chart.js/Chart.min.js"></script>
+<script src="bower_components/nprogress/nprogress.js"></script>
 <script src="bower_components/backbone-oauth-1.0a/sha1.js"></script>
 <script src="bower_components/backbone-oauth-1.0a/backbone-oauth.js"></script>
 
-
-<script>
-    var data2 = {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-            {
-                label: "My First dataset",
-                fillColor: "rgba(251,46,69,0.2)",
-                strokeColor: "rgba(251,46,69,1)",
-                pointColor: "#FB2E45",
-                pointStrokeColor: "#fff",
-                pointHighlightFill: "#fff",
-                pointHighlightStroke: "rgba(220,220,220,1)",
-                data: [5, 4.5, 7, 8, 5, 5, 4]
-            }/*,
-             {
-             label: "My Second dataset",
-             fillColor: "rgba(151,187,205,0.2)",
-             strokeColor: "rgba(151,187,205,1)",
-             pointColor: "rgba(151,187,205,1)",
-             pointStrokeColor: "#fff",
-             pointHighlightFill: "#fff",
-             pointHighlightStroke: "rgba(151,187,205,1)",
-             data: [28, 48, 4, 19, 8, 27, 9]
-             }*/
-        ]
-    };
-
-    var ctx2 = document.getElementById("myChart2").getContext("2d");
-    var myLineChart = new Chart(ctx2).Line(data2, {
-        bezierCurve: false
-    });
-</script>
 <script>
     var data3 = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],

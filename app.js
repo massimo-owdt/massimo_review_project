@@ -144,6 +144,8 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
             el: '#item_details_1',
             model: this.model
         });
+        NProgress.start();
+        NProgress.done();
     }
 });
 
@@ -193,7 +195,7 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
             datasets: [
                 {
                     label: "My First dataset",
-                    fillColor: "rgba(251,46,69,0)",
+                    fillColor: "rgba(0,0,0,0.1)",
                     strokeColor: "#000000",
                     pointColor: "#000000",
                     pointStrokeColor: "#000000",
@@ -222,13 +224,13 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
             datasets: [
                 {
                     label: "My First dataset",
-                    fillColor: "rgba(251,46,69,0)",
+                    fillColor: "rgba(0,0,0,0.1)",
                     strokeColor: "#000000",
                     pointColor: "#000000",
                     pointStrokeColor: "#000000",
                     pointHighlightFill: "#000000",
                     pointHighlightStroke: "#000000",
-                    data: [5, 4.5, 7, 6.5, 5, 5, 4, 5, 4.5, 6, 5, 6, 5, 5.5]
+                    data: [5, 4.5, 7, 6.5, 5, 5, 4.3, 5, 4.5, 6, 5, 5.7, 5, 5.5]
                 }/*,
                  {
                  label: "My Second dataset",
@@ -266,10 +268,16 @@ myapp.my_constructors.views.SmallReview = Backbone.View.extend({
     },
     loadDetails: function(){
         console.log('I have been clicked');
+        $(this.$('.review_item')).css({
+            /*"background-color":"rgba(251,46,69,0.2)",*/
+            "background-color":"rgba(255,212,84,0.2)"
+        });
         myapp.my_objects.views.Details_3 = new myapp.my_constructors.views.ItemDetail_3({
             el: '#item_details_3',
             model: this.model
         });
+        NProgress.start();
+        NProgress.done();
     }
 });
 
@@ -295,7 +303,63 @@ myapp.my_constructors.views.ItemDetail_3 = Backbone.View.extend({
     template: _.template($("#big_review_template").html()),
     render: function(){
         this.$el.html(this.template(this.model.toJSON()));
+        this.showChart();
         return this;
+    },
+    showChart: function(){
+        console.log('showing chart');
+        var data3 = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(0,0,0,0.1)",
+                    strokeColor: "#000000",
+                    highlightFill: "rgba(220,220,220,0.75)",
+                    highlightStroke: "rgba(220,220,220,1)",
+                    data: [1, 2, 3, 4, 5, 2, 4]
+                }
+            ]
+        };
+
+        var chart3options = {
+            //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
+            scaleBeginAtZero : true,
+
+            //Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines : true,
+
+            //String - Colour of the grid lines
+            scaleGridLineColor : "rgba(0,0,0,.2)",
+
+            //Number - Width of the grid lines
+            scaleGridLineWidth : 1,
+
+            //Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+
+            //Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines: false,
+
+            //Boolean - If there is a stroke on each bar
+            barShowStroke : true,
+
+            //Number - Pixel width of the bar stroke
+            barStrokeWidth : 3,
+
+            //Number - Spacing between each of the X value sets
+            barValueSpacing : 50,
+
+            //Number - Spacing between data sets within X values
+            barDatasetSpacing : 5,
+
+            //String - A legend template
+            legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
+        };
+
+        var ctx3 = document.getElementById("myChart3").getContext("2d");
+        var myBarChart = new Chart(ctx3).Bar(data3, chart3options);
     }
 });
 
@@ -426,3 +490,5 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
 
 myapp.my_objects.router.APPRouter = new myapp.my_constructors.router.AppRouter;
 Backbone.history.start();
+
+

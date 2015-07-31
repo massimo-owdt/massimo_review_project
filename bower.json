@@ -22,6 +22,7 @@
     "Chart.js": "nnnick/Chart.js#~1.0.2",
     "Simple-Grid": "ThisIsDallas/Simple-Grid",
     "backbone-oauth-1.0a": "amoshg/backbone-oauth-1.0a#~0.7.0",
-    "oauth-1.0a": "ddo/oauth-1.0a#~0.2.1"
+    "oauth-1.0a": "ddo/oauth-1.0a#~0.2.1",
+    "nprogress": "rstacruz/nprogress#~0.2.0"
   }
 }
