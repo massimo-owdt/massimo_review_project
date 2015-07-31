@@ -134,6 +134,11 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
     },
     loadDetails: function(){
         console.log('I have been clicked');
+        console.log(this.$el);
+        $(this.$('.list_item')).css({
+            /*"background-color":"rgba(251,46,69,0.2)",*/
+            "background-color":"rgba(255,212,84,0.2)"
+        });
 
         myapp.my_objects.views.Details_1 = new myapp.my_constructors.views.ItemDetail_1({
             el: '#item_details_1',
@@ -159,14 +164,13 @@ myapp.my_constructors.views.ListItemContainer = Backbone.View.extend({
 myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
     initialize: function(){
         console.log('Item detail 1 view has been initialized');
-
-        /*setTimeout(this.render(), 3000);*/
         this.render();
     },
     template: _.template($("#details_1_template").html()),
     render: function(){
         this.showLoader();
         this.$el.html(this.template(this.model.toJSON()));
+        this.showChart();
         return this;
     },
     showLoader: function(){
@@ -178,8 +182,71 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
             $('.loader').css({
                 "display":"none"
             });
-        }, 1000);
+        }, 1200);
+    },
+    showChart: function(){
+        console.log('showing chart');
 
+        /*CHART #1*/
+        var data = {
+            labels: ["PRICE", "QUALITY", "RESPONSIVENESS", "PUNCTUALITY", "DESIGN", "ORGANIZATION", "COLOR"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(251,46,69,0)",
+                    strokeColor: "#000000",
+                    pointColor: "#000000",
+                    pointStrokeColor: "#000000",
+                    pointHighlightFill: "#000000",
+                    pointHighlightStroke: "#000000",
+                    data: [65, 59, 90, 81, 56, 55, 40]
+                }/*,
+                 {
+                 label: "My Second dataset",
+                 fillColor: "rgba(151,187,205,0.2)",
+                 strokeColor: "rgba(151,187,205,1)",
+                 pointColor: "#000000",
+                 pointStrokeColor: "#fff",
+                 pointHighlightFill: "#fff",
+                 pointHighlightStroke: "rgba(151,187,205,1)",
+                 data: [28, 48, 40, 19, 96, 27, 100]
+                 }*/
+            ]
+        };
+        var ctx = document.getElementById("myChart").getContext("2d");
+        var myRadarChart = new Chart(ctx).Radar(data);
+
+        /*CHART #2*/
+        var data2 = {
+            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "January", "February"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(251,46,69,0)",
+                    strokeColor: "#000000",
+                    pointColor: "#000000",
+                    pointStrokeColor: "#000000",
+                    pointHighlightFill: "#000000",
+                    pointHighlightStroke: "#000000",
+                    data: [5, 4.5, 7, 6.5, 5, 5, 4, 5, 4.5, 6, 5, 6, 5, 5.5]
+                }/*,
+                 {
+                 label: "My Second dataset",
+                 fillColor: "rgba(151,187,205,0.2)",
+                 strokeColor: "rgba(151,187,205,1)",
+                 pointColor: "rgba(151,187,205,1)",
+                 pointStrokeColor: "#fff",
+                 pointHighlightFill: "#fff",
+                 pointHighlightStroke: "rgba(151,187,205,1)",
+                 data: [28, 48, 4, 19, 8, 27, 9]
+                 }*/
+            ]
+        };
+
+        var ctx2 = document.getElementById("myChart2").getContext("2d");
+        var myLineChart = new Chart(ctx2).Line(data2, {
+            bezierCurve: false
+        });
 
     }
 });
@@ -231,6 +298,9 @@ myapp.my_constructors.views.ItemDetail_3 = Backbone.View.extend({
         return this;
     }
 });
+
+
+
 
 
 
