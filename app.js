@@ -131,7 +131,8 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
         return this;
     },
     events: {
-        'click .item_name': 'loadDetails'
+        'click .item_name': 'loadDetails',
+        'click .item_add_review': 'add_review'
     },
     loadDetails: function(){
         console.log('I have been clicked');
@@ -147,6 +148,9 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
         });
         NProgress.start();
         NProgress.done();
+    },
+    add_review: function(){
+        console.log('review added');
     }
 });
 
@@ -349,7 +353,7 @@ myapp.my_constructors.views.ItemDetail_3 = Backbone.View.extend({
             barStrokeWidth : 3,
 
             //Number - Spacing between each of the X value sets
-            barValueSpacing : 50,
+            barValueSpacing : 5,
 
             //Number - Spacing between data sets within X values
             barDatasetSpacing : 5,

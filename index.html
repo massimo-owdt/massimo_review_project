@@ -18,8 +18,8 @@
         <a href="">home</a>
         <a href="#menu1">menu1</a>
         <a href="#menu2">menu2</a>
-        <a href="#menu3">log in</a>
-        <a href="#menu4">sign up</a>
+        <a href="#menu3">login</a>
+        <a href="#menu4">menu4</a>
     </div>
 </div>
 
@@ -54,6 +54,8 @@
         <div class="item_address"><%= item_address %><div class="review_count">(<%= item_review_count %>) reviews</div></div>
         <div class="item_phone"><%= item_phone %></div>
         <div class="item_email"><%= item_email %></div>
+        <div class="item_add_review">add review >></div>
+
     </div>
 </script>
 
@@ -61,8 +63,8 @@
     <div class="animated fadeIn">
         <div class="summary">OVERALL PERFORMANCE</div>
         <div class="final_rating animated flash"><%= item_rating %></div>
-        <canvas id="myChart" width="500" height="500"></canvas>
-        <canvas id="myChart2" width="500" height="250"></canvas>
+        <canvas id="myChart" width="400" height="300"></canvas>
+        <canvas id="myChart2" width="400" height="250"></canvas>
     </div>
 </script>
 
@@ -85,7 +87,7 @@
             <div class="cons_title">CONS:</div>
             <div class="review_text"><%= review_cons %></div>
             <div class="grades_summary">
-                <canvas id="myChart3" width="500" height="250"></canvas>
+                <canvas id="myChart3" width="400" height="250"></canvas>
             </div>
         </div>
     </div>
@@ -102,9 +104,12 @@
             </div>
             <div id="login_password">Password:</div>
             <div>
-                <input name="password" type="text" class="form_input"/>
+                <input name="password" type="password" class="form_input"/>
             </div>
-            <!--<div id="login_button">LOGIN</div>-->
+            <div id="login_button_wrapper">
+                <div id="login_button"><span class="text_vertical_alignment">Login</span></div>
+            </div>
+
         </div>
         <div id="registration_wrapper">
             <div id="registration_title">REGISTRATION</div>
@@ -122,11 +127,14 @@
             </div>
             <div id="registration_password">Password:</div>
             <div>
-                <input name="your_password" type="text" class="form_input"/>
+                <input name="your_password" type="password" class="form_input"/>
             </div>
             <div id="registration_password_repeat">Repeat Password:</div>
             <div>
-                <input name="your_password_repeat" type="text" class="form_input"/>
+                <input name="your_password_repeat" type="password" class="form_input"/>
+            </div>
+            <div id="registration_button_wrapper">
+                <div id="registration_button"><span class="text_vertical_alignment">Register</span></div>
             </div>
         </div>
 

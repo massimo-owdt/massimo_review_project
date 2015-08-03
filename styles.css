@@ -30,8 +30,8 @@ body {
     width: 100%;
 
     /*box model*/
-    margin: 0px 0px 0px 0px;
-    border: 1px dotted #000000;
+    margin: 0px 0px 20px 0px;
+    /*border: 1px dotted #000000;*/
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
@@ -60,7 +60,7 @@ body {
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
-    /*font-size: 40px;*/
+    font-size: 0.8em;
 }
 
 #header_left {
@@ -81,12 +81,12 @@ body {
 
     /*box model*/
     margin: 0px 0px 0px 0px;
-    border: 1px dotted #000000;
+    /*border: 1px dotted #000000;*/
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
     text-align: left;
-    font-size: 70px;
+    font-size: 3em;
     /*font-family: 'Holtwood One SC', serif;*/
     font-family: 'Righteous', cursive;
 
@@ -111,12 +111,12 @@ body {
 
     /*box model*/
     margin: 0px auto 0px auto;
-    border: 1px dotted #000000;
+    /*border: 1px dotted #000000;*/
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
     text-align: center;
-    /*font-size: 40px;*/
+    font-size: 0.8em;
 }
 
 #list_container {
@@ -158,14 +158,14 @@ body {
     display: block; /*default display for div tags*/
 
     /*size*/
-    height: 100px;
+    height: auto;
     width: 100%;
 
     /*box model*/
-    margin: 0px 0px 0px 0px;
+    margin: 0px 0px 20px 0px;
     /*border: 1px dotted #000000;*/
     /*border-bottom: 1px dashed slategray;*/
-    padding: 10px 0px 0px 10px;
+    padding: 0px 0px 0px 0px;
 
     /*decorations*/
     text-align: left;
@@ -196,9 +196,13 @@ body {
     /*decorations*/
     text-align: left;
     font-weight: bold;
-    text-decoration: underline;
     /*font-size: 40px;*/
     cursor: pointer;
+}
+
+.item_name:hover {
+    text-decoration: underline;
+    color: #0000ff;
 }
 
 .item_address {
@@ -439,7 +443,7 @@ body {
     text-align: center;
     font-weight: bold;
     text-decoration: underline;
-    /*font-size: 40px;*/
+    font-size: 1.2em;
 }
 
 canvas {
@@ -468,7 +472,7 @@ canvas {
 
     /*box model*/
     margin: 5px 0px 0px 0px;
-   /* border: 1px dotted #000000;*/
+    /* border: 1px dotted #000000;*/
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
@@ -741,7 +745,7 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    font-size: 100px;
+    font-size: 8em;
 }
 
 #login_registration_wrapper {
@@ -768,7 +772,7 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    /*font-size: 40px;*/
+
 }
 
 #login_title {
@@ -794,8 +798,9 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    font-size: 50px;
+    font-size: 1.2em;
     text-decoration: underline;
+    font-weight: bold;
 }
 
 #login_username {
@@ -821,7 +826,7 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    font-size: 25px;
+    /*font-size: 0.8em;*/
 }
 
 #login_password {
@@ -847,7 +852,7 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    font-size: 25px;
+    /*font-size: 0.8em;*/
 
 }
 
@@ -857,7 +862,10 @@ canvas {
     border-radius: 5px;
     height: 50px;
     width: 80%;
-    font-family: 'Anton', sans-serif;
+    font-family: 'Share Tech Mono';
+    font-size: 25px;
+    text-align: center;
+    color: #ff0000;
 }
 
 #login_wrapper {
@@ -905,7 +913,7 @@ canvas {
     /*box model*/
     margin: 0px 0px 0px 0px;
     /*border: 1px dotted #000000;*/
-    border-left: 1px dashed #ff0000;
+    border-left: 1px dashed slategray;
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
@@ -936,37 +944,41 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    font-size: 50px;
+    font-size: 1.2em;
     text-decoration: underline;
+    font-weight: bold;
 }
 
 #login_button {
     /*positioning*/
-    position: relative;
-    top: 0px;
+    position: absolute;
+    top: 50%;
     right: 0px;
     bottom: 0px;
     left: 0px;
-    float: left;
-
+    float: right;
+    transform: translateY(-50%);
 
     /*display*/
     display: block; /*default display for div tags*/
 
     /*size*/
-    height: 50px;
-    width: 50%;
+    height: auto;
+    width: 40%;
 
     /*box model*/
-    margin: 20px 0px 0px 0px;
+    margin: 0px auto 0px auto;
     /*border: 1px dotted #000000;*/
     padding: 0px 0px 0px 0px;
 
-    font-family: 'Anton', sans-serif;
-    color: #ffffff;
-    background-color: #000000;
+    /*decorations*/
     text-align: center;
+    color: #000000;
+    background-color: rgba(255,212,84,0.5);
     border-radius: 7px;
+    vertical-align: middle;
+    /*font-size: 1.2em;*/
+    cursor: pointer;
 }
 
 #registration_name {
@@ -992,7 +1004,7 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    font-size: 25px;
+/*    font-size: 0.8em;*/
 }
 
 #registration_username {
@@ -1018,7 +1030,7 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    font-size: 25px;
+    font-size: 2em;
 }
 
 #registration_email {
@@ -1044,7 +1056,7 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    font-size: 25px;
+    font-size: 2em;
 
 }
 
@@ -1071,7 +1083,7 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    font-size: 25px;
+    font-size: 2em;
 
 }
 
@@ -1098,6 +1110,126 @@ canvas {
 
     /*decorations*/
     text-align: center;
-    font-size: 25px;
+    font-size: 2em;
 
+}
+
+#login_button_wrapper {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100px;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 2em;
+}
+
+#registration_button_wrapper {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100px;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 25px;
+}
+
+#registration_button {
+    /*positioning*/
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: right;
+    transform: translateY(-50%);
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 40%;
+
+    /*box model*/
+    margin: 0px auto 0px auto;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    color: #000000;
+    background-color: rgba(255,212,84,0.5);
+    border-radius: 7px;
+    vertical-align: middle;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.text_vertical_alignment {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.item_add_review {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: right;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: auto;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: right;
+    /*font-size: 40px;*/
+    cursor: pointer;
+}
+
+.item_add_review:hover {
+    text-decoration: underline;
 }
