@@ -629,7 +629,7 @@ canvas {
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
-    text-align: left;
+    text-align: center;
     font-weight: bold;
     /*font-size: 20px;*/
 }
@@ -656,7 +656,7 @@ canvas {
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
-    text-align: left;
+    text-align: center;
     font-weight: bold;
     /*font-size: 20px;*/
 }
@@ -742,4 +742,362 @@ canvas {
     /*decorations*/
     text-align: center;
     font-size: 100px;
+}
+
+#login_registration_wrapper {
+    /*positioning*/
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: right;
+    transform: translateY(-50%);
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 80%;
+    width: 60%;
+
+    /*box model*/
+    margin: 0px auto 0px auto;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 40px;*/
+}
+
+#login_title {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 50px;
+    text-decoration: underline;
+}
+
+#login_username {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 25px;
+}
+
+#login_password {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 25px;
+
+}
+
+.form_input {
+    background-color: transparent;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: 50px;
+    width: 80%;
+    font-family: 'Anton', sans-serif;
+}
+
+#login_wrapper {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 50%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 25px*/;
+}
+
+#registration_wrapper {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: right;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 50%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    border-left: 1px dashed #ff0000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 25px*/;
+}
+
+#registration_title {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 50px;
+    text-decoration: underline;
+}
+
+#login_button {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 50px;
+    width: 50%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    font-family: 'Anton', sans-serif;
+    color: #ffffff;
+    background-color: #000000;
+    text-align: center;
+    border-radius: 7px;
+}
+
+#registration_name {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 25px;
+}
+
+#registration_username {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 25px;
+}
+
+#registration_email {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 25px;
+
+}
+
+#registration_password {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 25px;
+
+}
+
+#registration_password_repeat {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 25px;
+
 }

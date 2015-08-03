@@ -103,8 +103,9 @@ myapp.my_constructors.views.Menu3 = Backbone.View.extend({
     initialize: function(){
         this.render();
     },
+    template: _.template($("#login_form_template").html()),
     render: function(){
-        this.$el.html('<p>menu 3</p>');
+        this.$el.html(this.template);
         return this;
     }
 });
