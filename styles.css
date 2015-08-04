@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Share+Tech+Mono);
 @import url(http://fonts.googleapis.com/css?family=Holtwood+One+SC);
 @import url(http://fonts.googleapis.com/css?family=Righteous);
-
+@import url(http://fonts.googleapis.com/css?family=Inconsolata:400,700);
 
 * {
     box-sizing: border-box;
@@ -10,6 +10,7 @@
 body {
     /*font-family: 'Kreon', serif;*/
     font-family: 'Share Tech Mono';
+    /*font-family: 'Inconsolata';*/
     background-color: #ffffff;
 }
 
@@ -1029,7 +1030,7 @@ canvas {
 
     /*decorations*/
     text-align: center;
-/*    font-size: 0.8em;*/
+    /*    font-size: 0.8em;*/
 }
 
 #registration_username {
@@ -1258,6 +1259,7 @@ canvas {
 
 .item_add_review:hover {
     text-decoration: underline;
+    color: red;
 }
 
 .form_input_wrapper {
@@ -1397,6 +1399,7 @@ canvas {
 
     /*decorations*/
     text-align: left;
+    color: #aaaaaa;
 }
 
 #review_opinion {
@@ -1527,4 +1530,25 @@ canvas {
 
     /*decorations*/
     text-align: center;
+}
+
+.useful {
+    /*display*/
+    display: inline-block; /*default display for div tags*/
+    cursor: pointer;
+
+}
+
+.useful:hover {
+    color: limegreen;
+}
+
+.not_useful {
+    /*display*/
+    display: inline-block; /*default display for div tags*/
+    cursor: pointer;
+}
+
+.not_useful:hover {
+    color: red;
 }

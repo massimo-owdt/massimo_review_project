@@ -48,6 +48,7 @@
 
 <!--UNDERSCORE TEMPLATES-->
 <script type="text/template" id="single_item_template">
+    <div class="sort">sort</div>
     <div class="list_item">
         <div class="item_name"><span><%= item_name %></span>
             <div class="item_rating animated fadeIn">
@@ -76,6 +77,7 @@
 
 <script type="text/template" id="small_review_template">
     <div class="review_item">
+        <div class="sort_date">sort</div>
         <!--<div class="review_number"><%= review_number %></div>-->
         <div class="review_date"><%= review_date %></div>
         <div class="review_title"><%= review_title %></div>
@@ -103,8 +105,12 @@
             </div>-->
             <div id="review_opinion">
                 <div>Was this review useful?</div>
-                <i class="fa fa-thumbs-up"></i> yes
-                <i class="fa fa-thumbs-down"></i> no
+                <div class="useful">
+                    <i class="fa fa-thumbs-up"></i> yes
+                </div>
+                <div class="not_useful">
+                    <i class="fa fa-thumbs-down"></i> no
+                </div>
             </div>
 
         </div>

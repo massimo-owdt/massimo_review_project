@@ -41,7 +41,7 @@ myapp.my_constructors.models.Review = Backbone.Model.extend({
     defaults: {
         review_number: 6666,
         review_title: 'Default Title',
-        review_date: '00/00/0000',
+        review_date: '1982-04-23T18:25:43.511Z',
         review_author: 'Francois Voltaire',
         review_pros: 'Default Pros',
         review_cons: 'Defualt Cons'
@@ -60,7 +60,6 @@ myapp.my_constructors.collections.ItemsCollection = Backbone.Collection.extend({
     model: myapp.my_constructors.models.Item,
     initialize: function(){
         console.log('A new items collection has been initialized');
-
     }
 });
 
@@ -173,6 +172,43 @@ myapp.my_constructors.views.ListItemContainer = Backbone.View.extend({
             var singleItemView = new myapp.my_constructors.views.SingleItem({model: item});
             this.$el.append(singleItemView.render().el);
         }, this);
+    },
+    events: {
+        'click .sort': 'sort_by_name'
+    },
+    sort_by_name: function(){
+        this.collection.models.sort(function(a, b){
+            var nameA = a.attributes.item_name.toLowerCase();
+            var nameB = b.attributes.item_name.toLowerCase();
+            if (nameA < nameB){
+                return -1;
+            } //sort string ascending
+            if (nameA > nameB){
+                return 1;
+            }
+            return 0; //default return value (no sorting)
+        });
+        console.log(JSON.stringify(this.collection.models));
+        this.clean_view();
+        this.render();
+    },
+    sort_by_rating: function(){
+        this.collection.models.sort(function(a, b){
+            return a.attributes.item_rating - b.attributes.item_rating
+        });
+        console.log(JSON.stringify(this.collection.models));
+        this.clean_view();
+        this.render();
+    },
+    sort_by_date: function(){
+        /*this.collection.models.sort(function(a, b){
+         var dateA = new Date(a.retiredate);
+         var dateB = new Date(b.retiredate);
+         return dateA-dateB; //sort by date ascending
+         });*/
+    },
+    clean_view: function(){
+        this.$el.html('');
     }
 });
 
@@ -305,7 +341,24 @@ myapp.my_constructors.views.ReviewListContainer = Backbone.View.extend({
             var SmallReviewView = new myapp.my_constructors.views.SmallReview({model: item});
             this.$el.append(SmallReviewView.render().el);
         }, this);
+    },
+    events: {
+        'click .sort_date': 'sort_by_date'
+    },
+    sort_by_date: function(){
+        this.collection.models.sort(function(a, b){
+            var dateA = new Date(a.attributes.review_date);
+            console.log(dateA);
+            var dateB = new Date(b.attributes.review_date);
+            return dateA-dateB; //sort by date ascending
+        });
+        this.clean_view();
+        this.render();
+    },
+    clean_view: function(){
+        this.$el.html('');
     }
+
 });
 
 myapp.my_constructors.views.ItemDetail_3 = Backbone.View.extend({
@@ -318,6 +371,10 @@ myapp.my_constructors.views.ItemDetail_3 = Backbone.View.extend({
         this.$el.html(this.template(this.model.toJSON()));
         this.showChart();
         return this;
+    },
+    events: {
+        'click .useful': 'add_useful',
+        'click .not_useful': 'add_not_useful'
     },
     showChart: function(){
         console.log('showing chart');
@@ -371,8 +428,14 @@ myapp.my_constructors.views.ItemDetail_3 = Backbone.View.extend({
 
         };
 
-        var ctx3 = document.getElementById("myChart3").getContext("2d");
-        var myBarChart = new Chart(ctx3).Bar(data3, chart3options);
+        /*var ctx3 = document.getElementById("myChart3").getContext("2d");
+         var myBarChart = new Chart(ctx3).Bar(data3, chart3options);*/
+    },
+    add_useful: function(){
+        console.log('useful count has been increased');
+    },
+    add_not_useful: function(){
+        console.log('NOT useful count has been increased');
     }
 });
 
@@ -436,20 +499,25 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         console.log('kkkkkk');
 
         var i1 = new myapp.my_constructors.models.Item({
-            item_name: 'CocaCola',
+            item_name: 'Robert',
             item_rating: 80,
             item_review_count: 200,
             item_phone: '666 666 66 66'
         });
-        var i2 = new myapp.my_constructors.models.Item();
+        var i2 = new myapp.my_constructors.models.Item({
+            item_name: 'Maria'
+        });
         var i3 = new myapp.my_constructors.models.Item({
+            item_name: 'Andrew',
             item_rating: 20,
             item_phone: '999 999 99 99'
         });
         var i4 = new myapp.my_constructors.models.Item({
+            item_name: 'Zoe',
             item_rating: 50
         });
         var i5 = new myapp.my_constructors.models.Item({
+            item_name: 'Philip',
             item_rating: 46
         });
 
@@ -481,11 +549,13 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         var r3 = new myapp.my_constructors.models.Review();
         var r4 = new myapp.my_constructors.models.Review({
             review_author: 'Massimo Penzo',
-            review_cons: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+            review_cons: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
+            review_date: '2012-04-23T18:25:43.511Z'
         });
         var r5 = new myapp.my_constructors.models.Review({
             review_number: 2222,
-            review_cons: 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
+            review_cons: 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO',
+            review_date: '2013-04-23T18:25:43.511Z'
         });
         var r6 = new myapp.my_constructors.models.Review();
         var r7 = new myapp.my_constructors.models.Review();
