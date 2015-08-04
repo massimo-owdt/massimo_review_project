@@ -26,12 +26,12 @@ body {
     display: block; /*default display for div tags*/
 
     /*size*/
-    height: auto;
+    height: 70px;
     width: 100%;
 
     /*box model*/
     margin: 0px 0px 20px 0px;
-    /*border: 1px dotted #000000;*/
+    border: 1px dotted #000000;
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
@@ -81,7 +81,7 @@ body {
 
     /*box model*/
     margin: 0px 0px 0px 0px;
-    /*border: 1px dotted #000000;*/
+    border: 1px dotted #000000;
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
@@ -92,26 +92,52 @@ body {
 
 }
 
-#header_right {
+#header_center {
     /*positioning*/
-    position: absolute;
-    top: 50%;
+    position: relative;
+    top: 0px;
     right: 0px;
     bottom: 0px;
     left: 0px;
-    float: right;
-    transform: translateY(-50%);
+    float: left;
 
     /*display*/
     display: block; /*default display for div tags*/
 
     /*size*/
-    height: auto;
-    width: 70%;
+    height: 100%;
+    width: 40%;
 
     /*box model*/
-    margin: 0px auto 0px auto;
-    /*border: 1px dotted #000000;*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+    font-size: 1em;
+    /*font-family: 'Holtwood One SC', serif;*/
+}
+
+#header_right {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 30%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    border: 1px dotted #000000;
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
@@ -202,7 +228,6 @@ body {
 
 .item_name:hover {
     text-decoration: underline;
-    color: #0000ff;
 }
 
 .item_address {
@@ -472,7 +497,7 @@ canvas {
 
     /*box model*/
     margin: 5px 0px 0px 0px;
-    /* border: 1px dotted #000000;*/
+    /*border: 1px dotted #000000;*/
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
@@ -499,7 +524,7 @@ canvas {
 
     /*box model*/
     margin: 0px 0px 0px 0px;
-    /*border: 1px dotted #000000;*/
+    border: 1px dotted #000000;
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
@@ -521,7 +546,7 @@ canvas {
 
     /*size*/
     height: auto;
-    width: 70%;
+    width: 40%;
 
     /*box model*/
     margin: 0px 0px 0px 0px;
@@ -860,8 +885,8 @@ canvas {
     background-color: transparent;
     border: 1px solid #000000;
     border-radius: 5px;
-    height: 50px;
-    width: 80%;
+    height: 40px;
+    width: 100%;
     font-family: 'Share Tech Mono';
     font-size: 25px;
     text-align: center;
@@ -1201,6 +1226,7 @@ canvas {
 .text_vertical_alignment {
     display: inline-block;
     vertical-align: middle;
+    line-height: normal;
 }
 
 .item_add_review {
@@ -1232,4 +1258,273 @@ canvas {
 
 .item_add_review:hover {
     text-decoration: underline;
+}
+
+.form_input_wrapper {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 10px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    /*text-align: right;*/
+    /*font-size: 40px;*/
+    /*cursor: pointer;*/
+}
+
+#add_review_button_wrapper {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100px;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 25px;*/
+}
+
+#add_review_button {
+    /*positioning*/
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: right;
+    transform: translateY(-50%);
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 40%;
+
+    /*box model*/
+    margin: 0px auto 0px auto;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    color: #000000;
+    background-color: rgba(255,212,84,0.5);
+    border-radius: 7px;
+    vertical-align: middle;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+#search_area {
+    /*positioning*/
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: right;
+    transform: translateY(-50%);
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 50px;
+
+    /*box model*/
+    margin: 0px auto 0px auto;
+    border: 1px dotted #000000;
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    color: #000000;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+.review_stats {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: auto;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+}
+
+#review_opinion {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-size: 2em;
+
+}
+
+#review_attributes_wrapper {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 20px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: left;
+}
+
+.review_attribute {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 30px;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+
+}
+
+.attr_title {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 30%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    text-decoration: underline;
+
+}
+
+.attr_values {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: right;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 100%;
+    width: 60%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
 }

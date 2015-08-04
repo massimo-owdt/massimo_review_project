@@ -151,6 +151,14 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
     },
     add_review: function(){
         console.log('review added');
+        NProgress.start();
+        NProgress.done();
+
+        myapp.my_objects.views.Add_Review = new myapp.my_constructors.views.AddReview({
+            el: '#item_details_3',
+            model: this.model
+        });
+
     }
 });
 
@@ -368,6 +376,25 @@ myapp.my_constructors.views.ItemDetail_3 = Backbone.View.extend({
     }
 });
 
+myapp.my_constructors.views.AddReview = Backbone.View.extend({
+    initialize: function(){
+        console.log('Add Review VIEW initialized');
+        this.render();
+    },
+    template: _.template($("#add_review_template").html()),
+    render: function(){
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    },
+    events: {
+        'click #add_review_button': 'addReview'
+    },
+    addReview: function(){
+        console.log('new review added');
+    }
+
+});
+
 
 
 
@@ -409,6 +436,7 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         console.log('kkkkkk');
 
         var i1 = new myapp.my_constructors.models.Item({
+            item_name: 'CocaCola',
             item_rating: 80,
             item_review_count: 200,
             item_phone: '666 666 66 66'
@@ -460,12 +488,28 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
             review_cons: 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
         });
         var r6 = new myapp.my_constructors.models.Review();
+        var r7 = new myapp.my_constructors.models.Review();
+        var r8 = new myapp.my_constructors.models.Review();
+        var r9 = new myapp.my_constructors.models.Review();
+        var r10 = new myapp.my_constructors.models.Review();
+        var r11 = new myapp.my_constructors.models.Review();
+        var r12 = new myapp.my_constructors.models.Review();
+        var r13 = new myapp.my_constructors.models.Review();
+
         myapp.my_objects.collections.reviews.add(r1);
         myapp.my_objects.collections.reviews.add(r2);
         myapp.my_objects.collections.reviews.add(r3);
         myapp.my_objects.collections.reviews.add(r4);
         myapp.my_objects.collections.reviews.add(r5);
         myapp.my_objects.collections.reviews.add(r6);
+        myapp.my_objects.collections.reviews.add(r7);
+        myapp.my_objects.collections.reviews.add(r8);
+        myapp.my_objects.collections.reviews.add(r9);
+        myapp.my_objects.collections.reviews.add(r10);
+        myapp.my_objects.collections.reviews.add(r11);
+        myapp.my_objects.collections.reviews.add(r12);
+        myapp.my_objects.collections.reviews.add(r13);
+
 
         var vi2 = new myapp.my_constructors.views.ReviewListContainer({
             el: '#item_details_2',
