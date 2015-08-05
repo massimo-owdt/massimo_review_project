@@ -131,6 +131,20 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
     template: _.template($("#single_item_template").html()),
     render: function(){
         this.$el.html(this.template(this.model.toJSON()));
+        this.$('.rateYo').rateYo({
+            rating: this.model.attributes.item_rating,
+            /*rating: 3.2,*/
+            /*maxValue: 5,*/
+            starWidth: "20px",
+            normalFill: "#A0A0A0",
+            ratedFill: "#E74C3C",
+            numStars: 5,
+            /*halfStar: true,*/
+            readOnly: true
+            /*spacing: "2px"*/
+        });
+
+        console.log(this.model.attributes.item_rating);
         return this;
     },
     events: {
@@ -161,7 +175,6 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
             el: '#item_details_3',
             model: this.model
         });
-
     }
 });
 
@@ -686,25 +699,26 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
 
         var i1 = new myapp.my_constructors.models.Item({
             item_name: 'Robert',
-            item_rating: 80,
+            item_rating: 0.5,
             item_review_count: 200,
             item_phone: '666 666 66 66'
         });
         var i2 = new myapp.my_constructors.models.Item({
-            item_name: 'Maria'
+            item_name: 'Maria',
+            item_rating: 1
         });
         var i3 = new myapp.my_constructors.models.Item({
             item_name: 'Andrew',
-            item_rating: 20,
+            item_rating: 2,
             item_phone: '999 999 99 99'
         });
         var i4 = new myapp.my_constructors.models.Item({
             item_name: 'Zoe',
-            item_rating: 50
+            item_rating: 4
         });
         var i5 = new myapp.my_constructors.models.Item({
             item_name: 'Philip',
-            item_rating: 46
+            item_rating: 1
         });
 
         myapp.my_objects.collections.collec = new myapp.my_constructors.collections.ItemsCollection();
@@ -743,7 +757,7 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
             review_date: '2012-04-23T18:25:43.511Z',
             review_watch_count: '10',
             review_comments_count: '10',
-            review_useful_count: '10',
+            review_useful_count: '30',
             review_not_useful_count: '0'
         });
         var r5 = new myapp.my_constructors.models.Review({
@@ -762,8 +776,8 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
             review_cons: 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO',
             review_date: '2014-04-23T18:25:43.511Z',
             review_watch_count: '30',
-            review_comments_count: '30',
-            review_useful_count: '30',
+            review_comments_count: '15',
+            review_useful_count: '10',
             review_not_useful_count: '0'
         });
         var r7 = new myapp.my_constructors.models.Review();

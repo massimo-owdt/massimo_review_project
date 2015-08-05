@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="bower_components/animate.css/animate.min.css"/>
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="bower_components/nprogress/nprogress.css"/>
+    <link rel="stylesheet" href="bower_components/rateYo/min/jquery.rateyo.min.css"/>
     <link rel="stylesheet" href="radio_buttons.css"/>
+
     <title>reviews</title>
 
 </head>
@@ -72,12 +74,14 @@
     <div class="list_item">
         <div class="item_name"><span><%= item_name %></span>
             <div class="item_rating animated fadeIn">
+                <div class="rateYo"></div>
+                <!--<i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-            </div></div>
+                <i class="fa fa-star"></i>-->
+            </div>
+        </div>
         <div class="item_address"><%= item_address %><div class="review_count">(<%= item_review_count %>) reviews</div></div>
         <div class="item_phone"><%= item_phone %></div>
         <div class="item_email"><%= item_email %></div>
@@ -289,6 +293,7 @@
 
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/rateYo/min/jquery.rateyo.min.js"></script>
 <script src="bower_components/underscore/underscore-min.js"></script>
 <script src="bower_components/backbone/backbone.js"></script>
 <script src="bower_components/Chart.js/Chart.min.js"></script>
