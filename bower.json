@@ -20,11 +20,9 @@
     "animate.css": "daneden/animate.css#~3.3.0",
     "font-awesome": "FortAwesome/Font-Awesome#~4.3.0",
     "Chart.js": "nnnick/Chart.js#~1.0.2",
-    "Simple-Grid": "ThisIsDallas/Simple-Grid",
     "backbone-oauth-1.0a": "amoshg/backbone-oauth-1.0a#~0.7.0",
     "oauth-1.0a": "ddo/oauth-1.0a#~0.2.1",
     "nprogress": "rstacruz/nprogress#~0.2.0",
-    "rateYo": "prrashi/rateYo#~2.0.1",
-    "raty": "~2.7.0"
+    "rateYo": "prrashi/rateYo#~2.0.1"
   }
 }

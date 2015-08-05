@@ -462,7 +462,7 @@ body {
 
     /*box model*/
     margin: 0px 0px 0px 0px;
-    border: 1px dotted #000000;
+    /*border: 1px dotted #000000;*/
     padding: 0px 0px 0px 0px;
 
     /*decorations*/

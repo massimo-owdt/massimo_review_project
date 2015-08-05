@@ -133,13 +133,14 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
         this.$el.html(this.template(this.model.toJSON()));
         this.$('.rateYo').rateYo({
             rating: this.model.attributes.item_rating,
-            /*rating: 3.2,*/
+            /*rating: 2.5,*/
             /*maxValue: 5,*/
+            precision: 0,
             starWidth: "20px",
             normalFill: "#A0A0A0",
             ratedFill: "#E74C3C",
             numStars: 5,
-            /*halfStar: true,*/
+            halfStar: true,
             readOnly: true
             /*spacing: "2px"*/
         });
@@ -216,13 +217,6 @@ myapp.my_constructors.views.ListItemContainer = Backbone.View.extend({
         console.log(JSON.stringify(this.collection.models));
         this.clean_view();
         this.render();
-    },
-    sort_by_date: function(){
-        /*this.collection.models.sort(function(a, b){
-         var dateA = new Date(a.retiredate);
-         var dateB = new Date(b.retiredate);
-         return dateA-dateB; //sort by date ascending
-         });*/
     },
     clean_view: function(){
         this.$el.html('');
@@ -705,7 +699,7 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         });
         var i2 = new myapp.my_constructors.models.Item({
             item_name: 'Maria',
-            item_rating: 1
+            item_rating: 3
         });
         var i3 = new myapp.my_constructors.models.Item({
             item_name: 'Andrew',
@@ -720,6 +714,10 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
             item_name: 'Philip',
             item_rating: 1
         });
+        var i6 = new myapp.my_constructors.models.Item({
+            item_name: 'Joan',
+            item_rating: 5
+        });
 
         myapp.my_objects.collections.collec = new myapp.my_constructors.collections.ItemsCollection();
         myapp.my_objects.collections.collec.add(i1);
@@ -727,6 +725,7 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         myapp.my_objects.collections.collec.add(i3);
         myapp.my_objects.collections.collec.add(i4);
         myapp.my_objects.collections.collec.add(i5);
+        myapp.my_objects.collections.collec.add(i6);
 
         /*console.log(collec.toJSON());*/
 
