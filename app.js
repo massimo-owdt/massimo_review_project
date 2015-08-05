@@ -44,7 +44,11 @@ myapp.my_constructors.models.Review = Backbone.Model.extend({
         review_date: '1982-04-23T18:25:43.511Z',
         review_author: 'Francois Voltaire',
         review_pros: 'Default Pros',
-        review_cons: 'Defualt Cons'
+        review_cons: 'Defualt Cons',
+        review_watch_count: '0',
+        review_comments_count: '0',
+        review_useful_count: '0',
+        review_not_useful_count: '0'
     }
 });
 
@@ -350,7 +354,7 @@ myapp.my_constructors.views.ReviewListContainer = Backbone.View.extend({
             var dateA = new Date(a.attributes.review_date);
             console.log(dateA);
             var dateB = new Date(b.attributes.review_date);
-            return dateA-dateB; //sort by date ascending
+            return dateB-dateA; //sort by date ascending
         });
         this.clean_view();
         this.render();
@@ -458,6 +462,105 @@ myapp.my_constructors.views.AddReview = Backbone.View.extend({
 
 });
 
+myapp.my_constructors.views.ClientListFilters = Backbone.View.extend({
+    initialize: function(){
+        console.log('Client list filters view initialized');
+        this.render();
+    },
+    template: _.template($("#client_filters_template").html()),
+    render: function(){
+        this.$el.html(this.template);
+        return this;
+    },
+    events: {
+        'click #clients_f1': 'sort_by_name_desc',
+        'click #clients_f2': 'sort_by_name_asc',
+        'click #clients_f3': 'sort_by_rating_desc',
+        'click #clients_f4': 'sort_by_rating_asc'
+    },
+    sort_by_name_desc: function(){
+
+        myapp.my_objects.collections.Items_sorted_name_desc  = myapp.my_objects.collections.collec.clone();
+        console.log(JSON.stringify(myapp.my_objects.collections.Items_sorted_name_desc));
+
+        myapp.my_objects.collections.Items_sorted_name_desc.models.sort(function(a, b){
+            var nameA = a.attributes.item_name.toLowerCase();
+            var nameB = b.attributes.item_name.toLowerCase();
+            if (nameA < nameB){
+                return -1;
+            } //sort string ascending
+            if (nameA > nameB){
+                return 1;
+            }
+            return 0; //default return value (no sorting)
+        });
+
+        /*cleaning view before new rendering*/
+        $('#clients_list').html('');
+
+        var vi2 = new myapp.my_constructors.views.ListItemContainer({
+            el: '#clients_list',
+            collection: myapp.my_objects.collections.Items_sorted_name_desc
+        });
+    },
+    sort_by_name_asc: function(){
+        myapp.my_objects.collections.Items_sorted_name_asc  = myapp.my_objects.collections.collec.clone();
+        console.log(JSON.stringify(myapp.my_objects.collections.Items_sorted_name_asc));
+
+        myapp.my_objects.collections.Items_sorted_name_asc.models.sort(function(a, b){
+            var nameA = a.attributes.item_name.toLowerCase();
+            var nameB = b.attributes.item_name.toLowerCase();
+            if (nameA > nameB){
+                return -1;
+            } //sort string ascending
+            if (nameA < nameB){
+                return 1;
+            }
+            return 0; //default return value (no sorting)
+        });
+
+        /*cleaning view before new rendering*/
+        $('#clients_list').html('');
+
+        var vi3 = new myapp.my_constructors.views.ListItemContainer({
+            el: '#clients_list',
+            collection: myapp.my_objects.collections.Items_sorted_name_asc
+        });
+    },
+    sort_by_rating_desc: function(){
+        myapp.my_objects.collections.Items_sorted_rating_desc  = myapp.my_objects.collections.collec.clone();
+        console.log(JSON.stringify(myapp.my_objects.collections.Items_sorted_rating_desc));
+
+        myapp.my_objects.collections.Items_sorted_rating_desc.models.sort(function(a, b){
+            return b.attributes.item_rating - a.attributes.item_rating
+        });
+
+        /*cleaning view before new rendering*/
+        $('#clients_list').html('');
+
+        var vi4 = new myapp.my_constructors.views.ListItemContainer({
+            el: '#clients_list',
+            collection: myapp.my_objects.collections.Items_sorted_rating_desc
+        });
+    },
+    sort_by_rating_asc: function(){
+        myapp.my_objects.collections.Items_sorted_rating_asc  = myapp.my_objects.collections.collec.clone();
+        console.log(JSON.stringify(myapp.my_objects.collections.Items_sorted_rating_asc));
+
+        myapp.my_objects.collections.Items_sorted_rating_asc.models.sort(function(a, b){
+            return a.attributes.item_rating - b.attributes.item_rating
+        });
+
+        /*cleaning view before new rendering*/
+        $('#clients_list').html('');
+
+        var vi5 = new myapp.my_constructors.views.ListItemContainer({
+            el: '#clients_list',
+            collection: myapp.my_objects.collections.Items_sorted_rating_asc
+        });
+    }
+});
+
 
 
 
@@ -530,8 +633,11 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
 
         /*console.log(collec.toJSON());*/
 
+        var c_header = new myapp.my_constructors.views.ClientListFilters({
+            el: '#clients_header'
+        });
         var vi = new myapp.my_constructors.views.ListItemContainer({
-            el: '#list_container',
+            el: '#clients_list',
             collection: myapp.my_objects.collections.collec
         });
 

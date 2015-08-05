@@ -29,26 +29,34 @@
     </div>
 </div>
 
+
 <div id="content">
     <div id="list_container">
-        <div class="summary">CLIENTS</div>
+        <div id="clients_header"></div>
+        <div id="clients_list"></div>
     </div>
-    <div id="item_details_1">
-        <div class="summary">OVERALL PERFORMANCE</div>
-    </div>
-    <div id="item_details_2">
-        <div class="summary">REVIEWS</div>
-    </div>
-    <div id="item_details_3">
-        <div class="summary">REVIEW DETAILS</div>
-    </div>
-
+    <div id="item_details_1"></div>
+    <div id="item_details_2"></div>
+    <div id="item_details_3"></div>
 </div>
 
 
 <!--UNDERSCORE TEMPLATES-->
+
+<script type="text/template" id="client_filters_template">
+    <div id="clients_title">CLIENTS <i class="fa fa-filter"></i></div>
+    <div id="clients_filters">
+        <span id="clients_f1" class="filter_link_decoration">A-Z</span>,
+        <span id="clients_f2" class="filter_link_decoration">Z-A</span>,
+        <span id="clients_f3" class="filter_link_decoration">best rating</span>,
+        <span id="clients_f4" class="filter_link_decoration">worst rating</span>
+    </div>
+</script>
+
+
+
+
 <script type="text/template" id="single_item_template">
-    <div class="sort">sort</div>
     <div class="list_item">
         <div class="item_name"><span><%= item_name %></span>
             <div class="item_rating animated fadeIn">
@@ -68,7 +76,6 @@
 
 <script type="text/template" id="details_1_template">
     <div class="animated">
-        <div class="summary">OVERALL PERFORMANCE</div>
         <div class="final_rating animated flash"><%= item_rating %></div>
         <canvas id="myChart" width="400" height="300"></canvas>
         <canvas id="myChart2" width="400" height="250"></canvas>
@@ -92,7 +99,6 @@
 
 
 <script type="text/template" id="big_review_template">
-    <div class="summary">REVIEW DETAILS</div>
     <div class="animated">
         <div class="review_author"><span class="author_underline">Written by: </span><%= review_author %></div>
         <div class="review_details">
