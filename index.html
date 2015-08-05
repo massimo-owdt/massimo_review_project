@@ -22,7 +22,7 @@
     </div>
     <div id="header_right">
         <a href="">home</a>
-        <a href="#menu1">menu1</a>
+        <a href="#menu1">about</a>
         <a href="#menu2">menu2</a>
         <a href="#menu3">login</a>
         <a href="#menu4">menu4</a>
@@ -36,25 +36,37 @@
         <div id="clients_list"></div>
     </div>
     <div id="item_details_1"></div>
-    <div id="item_details_2"></div>
+    <div id="item_details_2">
+        <div id="reviews_header"></div>
+        <div id="reviews_list"></div>
+    </div>
     <div id="item_details_3"></div>
 </div>
 
 
 <!--UNDERSCORE TEMPLATES-->
 
+<script type="text/template" id="review_filters_template">
+    <div id="reviews_title">REVIEWS</div>
+    <div id="review_filters">
+        <i class="fa fa-filter"></i>:
+        <span id="reviews_f1" class="filter_link_decoration">oldest</span>,
+        <span id="reviews_f2" class="filter_link_decoration">newest</span>,
+        <span id="reviews_f3" class="filter_link_decoration">most seen</span>,
+        <span id="reviews_f4" class="filter_link_decoration">most useful</span>
+    </div>
+</script>
+
 <script type="text/template" id="client_filters_template">
-    <div id="clients_title">CLIENTS <i class="fa fa-filter"></i></div>
+    <div id="clients_title">CLIENTS</div>
     <div id="clients_filters">
+        <i class="fa fa-filter"></i>:
         <span id="clients_f1" class="filter_link_decoration">A-Z</span>,
         <span id="clients_f2" class="filter_link_decoration">Z-A</span>,
         <span id="clients_f3" class="filter_link_decoration">best rating</span>,
         <span id="clients_f4" class="filter_link_decoration">worst rating</span>
     </div>
 </script>
-
-
-
 
 <script type="text/template" id="single_item_template">
     <div class="list_item">
@@ -70,7 +82,6 @@
         <div class="item_phone"><%= item_phone %></div>
         <div class="item_email"><%= item_email %></div>
         <div class="item_add_review">add review >></div>
-
     </div>
 </script>
 
@@ -83,16 +94,15 @@
 </script>
 
 <script type="text/template" id="small_review_template">
-    <div class="review_item">
-        <div class="sort_date">sort</div>
+    <div class="review_item animated fadeIn">
         <!--<div class="review_number"><%= review_number %></div>-->
         <div class="review_date"><%= review_date %></div>
         <div class="review_title"><%= review_title %></div>
         <div class="review_stats">
-            <i class="fa fa-eye"></i> 152
-            <i class="fa fa-comments"></i> 30
-            <i class="fa fa-thumbs-up"></i> 152
-            <i class="fa fa-thumbs-down"></i> 152
+            <i class="fa fa-eye"></i> <%= review_watch_count %>
+            <i class="fa fa-comments"></i> <%= review_comments_count %>
+            <i class="fa fa-thumbs-up"></i> <%= review_useful_count %>
+            <i class="fa fa-thumbs-down"></i> <%= review_not_useful_count %>
         </div>
     </div>
 </script>
@@ -139,7 +149,6 @@
             <div id="login_button_wrapper">
                 <div id="login_button"><span class="text_vertical_alignment">Login</span></div>
             </div>
-
         </div>
         <div id="registration_wrapper">
             <div id="registration_title">REGISTRATION</div>

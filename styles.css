@@ -1789,3 +1789,83 @@ canvas {
     cursor: pointer;
     color: #0000ff;
 }
+
+#reviews_header {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 50px;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted red;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    /*font-size: 40px;*/
+}
+
+
+#reviews_title {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 50%;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted red;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+    font-size: 1.2em;
+}
+
+#review_filters {
+    /*positioning*/
+    position: relative;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: 50%;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px 0px 0px 0px;
+    /*border: 1px dotted red;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
+    /*font-size: 40px;*/
+}

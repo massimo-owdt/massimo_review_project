@@ -561,7 +561,90 @@ myapp.my_constructors.views.ClientListFilters = Backbone.View.extend({
     }
 });
 
+myapp.my_constructors.views.ReviewListFilters = Backbone.View.extend({
+    initialize: function () {
+        console.log('Review list filters view initialized');
+        this.render();
+    },
+    template: _.template($("#review_filters_template").html()),
+    render: function () {
+        this.$el.html(this.template);
+        return this;
+    },
+    events: {
+        'click #reviews_f1': 'sort_older_first',
+        'click #reviews_f2': 'sort_newest_first',
+        'click #reviews_f3': 'sort_most_seen_first',
+        'click #reviews_f4': 'sort_most_useful_first'
+    },
+    sort_older_first: function () {
+        myapp.my_objects.collections.Reviews_sorted_oldest_first = myapp.my_objects.collections.reviews.clone();
+        console.log(JSON.stringify(myapp.my_objects.collections.Reviews_sorted_oldest_first));
 
+        myapp.my_objects.collections.Reviews_sorted_oldest_first.models.sort(function(a, b){
+                var dateA = new Date(a.attributes.review_date);
+                console.log(dateA);
+                var dateB = new Date(b.attributes.review_date);
+                return dateA-dateB; //sort by date ascending
+            }
+        );
+
+        /*cleaning view before new rendering*/
+        $('#reviews_list').html('');
+
+        var r = new myapp.my_constructors.views.ReviewListContainer({
+            el: '#reviews_list',
+            collection: myapp.my_objects.collections.Reviews_sorted_oldest_first
+        });
+    },
+    sort_newest_first: function(){
+        myapp.my_objects.collections.Reviews_sorted_newest_first = myapp.my_objects.collections.reviews.clone();
+        console.log(JSON.stringify(myapp.my_objects.collections.Reviews_sorted_newest_first));
+
+        myapp.my_objects.collections.Reviews_sorted_newest_first.models.sort(function(a, b){
+                var dateA = new Date(a.attributes.review_date);
+                console.log(dateA);
+                var dateB = new Date(b.attributes.review_date);
+                return dateB-dateA; //sort by date ascending
+            }
+        );
+
+        /*cleaning view before new rendering*/
+        $('#reviews_list').html('');
+
+        var r = new myapp.my_constructors.views.ReviewListContainer({
+            el: '#reviews_list',
+            collection: myapp.my_objects.collections.Reviews_sorted_newest_first
+        });
+    },
+    sort_most_seen_first: function(){
+        myapp.my_objects.collections.reviews.models.sort(function(a, b){
+            return b.attributes.review_watch_count - a.attributes.review_watch_count
+        });
+
+        /*cleaning view before new rendering*/
+        $('#reviews_list').html('');
+
+        var r = new myapp.my_constructors.views.ReviewListContainer({
+            el: '#reviews_list',
+            collection: myapp.my_objects.collections.reviews
+        });
+    },
+    sort_most_useful_first: function(){
+        myapp.my_objects.collections.reviews.models.sort(function(a, b){
+            return b.attributes.review_useful_count - a.attributes.review_useful_count
+        });
+
+        /*cleaning view before new rendering*/
+        $('#reviews_list').html('');
+
+        var r = new myapp.my_constructors.views.ReviewListContainer({
+            el: '#reviews_list',
+            collection: myapp.my_objects.collections.reviews
+        });
+    }
+
+});
 
 
 
@@ -654,16 +737,35 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         var r2 = new myapp.my_constructors.models.Review();
         var r3 = new myapp.my_constructors.models.Review();
         var r4 = new myapp.my_constructors.models.Review({
+            review_title: 'AAAAAAAAA',
             review_author: 'Massimo Penzo',
             review_cons: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-            review_date: '2012-04-23T18:25:43.511Z'
+            review_date: '2012-04-23T18:25:43.511Z',
+            review_watch_count: '10',
+            review_comments_count: '10',
+            review_useful_count: '10',
+            review_not_useful_count: '0'
         });
         var r5 = new myapp.my_constructors.models.Review({
+            review_title: 'BBBBBB',
             review_number: 2222,
             review_cons: 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO',
-            review_date: '2013-04-23T18:25:43.511Z'
+            review_date: '2013-04-23T18:25:43.511Z',
+            review_watch_count: '20',
+            review_comments_count: '20',
+            review_useful_count: '20',
+            review_not_useful_count: '0'
         });
-        var r6 = new myapp.my_constructors.models.Review();
+        var r6 = new myapp.my_constructors.models.Review({
+            review_title: 'CCCCCCCC',
+            review_number: 2222,
+            review_cons: 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO',
+            review_date: '2014-04-23T18:25:43.511Z',
+            review_watch_count: '30',
+            review_comments_count: '30',
+            review_useful_count: '30',
+            review_not_useful_count: '0'
+        });
         var r7 = new myapp.my_constructors.models.Review();
         var r8 = new myapp.my_constructors.models.Review();
         var r9 = new myapp.my_constructors.models.Review();
@@ -687,8 +789,11 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         myapp.my_objects.collections.reviews.add(r13);
 
 
+        var tt = new myapp.my_constructors.views.ReviewListFilters({
+            el: '#reviews_header'
+        });
         var vi2 = new myapp.my_constructors.views.ReviewListContainer({
-            el: '#item_details_2',
+            el: '#reviews_list',
             collection: myapp.my_objects.collections.reviews
         });
 
