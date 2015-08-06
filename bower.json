@@ -23,6 +23,7 @@
     "backbone-oauth-1.0a": "amoshg/backbone-oauth-1.0a#~0.7.0",
     "oauth-1.0a": "ddo/oauth-1.0a#~0.2.1",
     "nprogress": "rstacruz/nprogress#~0.2.0",
-    "rateYo": "prrashi/rateYo#~2.0.1"
+    "rateYo": "prrashi/rateYo#~2.0.1",
+    "fuse.js": "krisk/Fuse#~1.2.2"
   }
 }

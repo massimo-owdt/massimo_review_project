@@ -1354,7 +1354,7 @@ canvas {
     right: 0px;
     bottom: 0px;
     left: 0px;
-    float: right;
+    /*float: left;*/
     transform: translateY(-50%);
 
     /*display*/
@@ -1362,18 +1362,18 @@ canvas {
 
     /*size*/
     height: auto;
-    width: 50px;
+    width: 50%;
 
     /*box model*/
     margin: 0px auto 0px auto;
-    border: 1px dotted #000000;
+    /*border: 1px dotted red;*/
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
     text-align: center;
     color: #000000;
-    font-size: 1.5em;
-    cursor: pointer;
+    font-size: 1em;
+    /*cursor: pointer;*/
 }
 
 .review_stats {
@@ -1868,4 +1868,46 @@ canvas {
     /*decorations*/
     text-align: center;
     /*font-size: 40px;*/
+}
+
+.search_box {
+    background-color: transparent;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    height: auto;
+    width: 100%;
+    font-family: 'Share Tech Mono';
+    font-size: 25px;
+    text-align: center;
+    color: #ff0000;
+}
+
+img {
+    width: 50%;
+}
+
+.confused_wrapper {
+    /*positioning*/
+    position: absolute;
+    top: 50%;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    float: left;
+    transform: translateY(-50%);
+
+    /*display*/
+    display: block; /*default display for div tags*/
+
+    /*size*/
+    height: auto;
+    width: 100%;
+
+    /*box model*/
+    margin: 0px auto 0px auto;
+    /*border: 1px dotted #000000;*/
+    padding: 0px 0px 0px 0px;
+
+    /*decorations*/
+    text-align: center;
 }

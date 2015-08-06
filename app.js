@@ -653,6 +653,98 @@ myapp.my_constructors.views.ReviewListFilters = Backbone.View.extend({
 
 });
 
+myapp.my_constructors.views.Search = Backbone.View.extend({
+    initialize: function(){
+        console.log('The SEARCH view has been initialized');
+        this.render();
+    },
+    template: _.template($("#search_template").html()),
+    render: function(){
+        this.$el.html(this.template);
+        return this;
+    },
+    events: {
+        'keyup #search_box': 'search_collection'
+    },
+    search_collection: function(){
+
+        if ($('#search_box').val() === "") {
+            console.log('empty');
+            $('#clients_list').html('');
+            var vi = new myapp.my_constructors.views.ListItemContainer({
+                el: '#clients_list',
+                collection: myapp.my_objects.collections.collec
+            });
+        } else {
+            console.log('NOT empty');
+            console.log('keyup');
+            var str = $('#search_box').val();
+
+            var x = JSON.stringify(myapp.my_objects.collections.collec.models);
+            console.log(JSON.stringify(x));
+
+            var y = JSON.parse(x);
+            console.log(y);
+
+            var options = {
+                keys: ['item_name', 'item_address', 'item_email'],
+                caseSensitive: false,
+                includeScore: false,
+                shouldSort: true,
+                location: 0,
+                threshold: 0.6,
+                distance: 100,
+                maxPatternLength: 32
+            };
+
+            var f = new Fuse(y, options);
+            var result = f.search(str);
+
+            console.log(result);
+
+            if (result.length == 0) {
+                var h = new myapp.my_constructors.views.Confused({
+                    el: '#clients_list'
+                });
+
+            } else {
+                var temp_coll = new myapp.my_constructors.collections.ItemsCollection();
+
+                result.forEach(function(w){
+                    var i = new myapp.my_constructors.models.Item({
+                        item_name: w.item_name,
+                        item_review_count: w.item_review_count,
+                        item_rating: w.item_rating,
+                        item_address: w.item_address,
+                        item_phone: w.item_phone,
+                        item_email: w.item_email
+                    });
+                    temp_coll.add(i);
+                });
+
+                $('#clients_list').html('');
+
+                var v = new myapp.my_constructors.views.ListItemContainer({
+                    el: '#clients_list',
+                    collection: temp_coll
+                });
+            }
+        }
+    }
+});
+
+myapp.my_constructors.views.Confused = Backbone.View.extend({
+    initialize: function(){
+        console.log('A new CONFUSED view has been created');
+        this.render();
+    },
+    template: _.template($("#confused_template").html()),
+    render: function(){
+        this.$el.html(this.template);
+        return this;
+    }
+});
+
 
 
 
@@ -695,11 +787,14 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
             item_name: 'Robert',
             item_rating: 0.5,
             item_review_count: 200,
-            item_phone: '666 666 66 66'
+            item_phone: '666 666 66 66',
+            item_address: 'dallas'
         });
         var i2 = new myapp.my_constructors.models.Item({
             item_name: 'Maria',
-            item_rating: 3
+            item_rating: 3,
+            item_email: 'maria@yahoo.com',
+            item_address: '1215 Test Rd. New York, NY 77458'
         });
         var i3 = new myapp.my_constructors.models.Item({
             item_name: 'Andrew',
@@ -822,6 +917,10 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
             }
         });
         console.log(rest);
+
+        var search = new myapp.my_constructors.views.Search({
+            el: '#search_area'
+        });
 
 
 

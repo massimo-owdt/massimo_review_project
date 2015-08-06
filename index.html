@@ -2,25 +2,21 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="mp_styles/styles.css"/>
     <link rel="stylesheet" href="bower_components/animate.css/animate.min.css"/>
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="bower_components/nprogress/nprogress.css"/>
     <link rel="stylesheet" href="bower_components/rateYo/min/jquery.rateyo.min.css"/>
-    <link rel="stylesheet" href="radio_buttons.css"/>
-
+    <link rel="stylesheet" href="mp_styles/radio_buttons.css"/>
     <title>reviews</title>
 
 </head>
 
 <body>
-
 <div id="header">
-    <div id="header_left">reviews:</div>
+    <div id="header_left"><a href="">reviews:</a></div>
     <div id="header_center">
-        <div id="search_area">
-            <span class="text_vertical_alignment"><i class="fa fa-search"></i></span>
-        </div>
+        <div id="search_area"></div>
     </div>
     <div id="header_right">
         <a href="">home</a>
@@ -48,6 +44,17 @@
 
 <!--UNDERSCORE TEMPLATES-->
 
+<script type="text/template" id="confused_template">
+    <div class="confused_wrapper">
+        <img src="mp_svgs/confused.svg" alt=""/>
+    </div>
+</script>
+
+
+<script type="text/template" id="search_template">
+    <input type="text" id="search_box" class="search_box" autofocus="" placeholder="search here..."/>
+</script>
+
 <script type="text/template" id="review_filters_template">
     <div id="reviews_title">REVIEWS</div>
     <div id="review_filters">
@@ -73,7 +80,7 @@
 <script type="text/template" id="single_item_template">
     <div class="list_item">
         <div class="item_name"><span><%= item_name %></span>
-            <div class="item_rating animated fadeIn">
+            <div class="item_rating animated">
                 <div class="rateYo"></div>
             </div>
         </div>
@@ -295,9 +302,9 @@
 <script src="bower_components/nprogress/nprogress.js"></script>
 <script src="bower_components/backbone-oauth-1.0a/sha1.js"></script>
 <script src="bower_components/backbone-oauth-1.0a/backbone-oauth.js"></script>
-<script src="app.js"></script>
+<script src="bower_components/fuse.js/src/fuse.min.js"></script>
 <script src="oauth1.js"></script>
-
+<script src="app.js"></script>
 
 
 </body>
