@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="bower_components/nprogress/nprogress.css"/>
     <link rel="stylesheet" href="bower_components/rateYo/min/jquery.rateyo.min.css"/>
     <link rel="stylesheet" href="mp_styles/radio_buttons.css"/>
+    <link rel="stylesheet" href="mp_styles/live_light.css"/>
     <title>reviews</title>
 
 </head>
@@ -50,9 +51,12 @@
     </div>
 </script>
 
-
 <script type="text/template" id="search_template">
-    <input type="text" id="search_box" class="search_box" autofocus="" placeholder="search here..."/>
+    <div class="live_wrapper">
+        <i class="fa fa-circle live_light"></i>
+    </div>
+    <div class="input_wrapper"><input type="text" id="search_box" class="search_box" autofocus="" placeholder=""/></div>
+
 </script>
 
 <script type="text/template" id="review_filters_template">
@@ -87,7 +91,7 @@
         <div class="item_address"><%= item_address %><div class="review_count">(<%= item_review_count %>) reviews</div></div>
         <div class="item_phone"><%= item_phone %></div>
         <div class="item_email"><%= item_email %></div>
-        <div class="item_add_review">add review >></div>
+        <div class="item_add_review">add review </div>
     </div>
 </script>
 
@@ -113,7 +117,6 @@
     </div>
 </script>
 
-
 <script type="text/template" id="big_review_template">
     <div class="animated">
         <div class="review_author"><span class="author_underline">Written by: </span><%= review_author %></div>
@@ -138,7 +141,6 @@
         </div>
     </div>
 </script>
-
 
 <script type="text/template" id="login_form_template">
     <div id="login_registration_wrapper">
