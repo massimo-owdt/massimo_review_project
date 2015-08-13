@@ -20,11 +20,12 @@ var myapp = {
 
 
 /*MODELS*/
-myapp.my_constructors.models.Item = Backbone.Model.extend({
+myapp.my_constructors.models.Client = Backbone.Model.extend({
     initialize: function(){
-        console.log('A new item has been created');
+        /*console.log('A new client has been created');*/
     },
     defaults: {
+        client_id: '0',
         item_name: 'My Company LLC',
         item_review_count: 120,
         item_rating: 5,
@@ -48,7 +49,12 @@ myapp.my_constructors.models.Review = Backbone.Model.extend({
         review_watch_count: '0',
         review_comments_count: '0',
         review_useful_count: '0',
-        review_not_useful_count: '0'
+        review_not_useful_count: '0',
+        review_attr_1: '0',
+        review_attr_2: '0',
+        review_attr_3: '0',
+        review_attr_4: '0',
+        review_attr_5: '0'
     }
 });
 
@@ -61,7 +67,7 @@ myapp.my_constructors.models.WPPost = Backbone.Model.extend({});
 
 /*COLLECTIONS*/
 myapp.my_constructors.collections.ItemsCollection = Backbone.Collection.extend({
-    model: myapp.my_constructors.models.Item,
+    model: myapp.my_constructors.models.Client,
     initialize: function(){
         console.log('A new items collection has been initialized');
     }
@@ -125,7 +131,7 @@ myapp.my_constructors.views.Menu4 = Backbone.View.extend({
 
 myapp.my_constructors.views.SingleItem = Backbone.View.extend({
     initialize: function(){
-        console.log('Single Item view initialized');
+        console.log('Single Client view initialized');
         this.render();
     },
     template: _.template($("#single_item_template").html()),
@@ -181,7 +187,7 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
 
 myapp.my_constructors.views.ListItemContainer = Backbone.View.extend({
     initialize: function(){
-        console.log('List Item Container View initialized');
+        console.log('List Client Container View initialized');
         this.render();
     },
     render: function(){
@@ -225,7 +231,7 @@ myapp.my_constructors.views.ListItemContainer = Backbone.View.extend({
 
 myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
     initialize: function(){
-        console.log('Item detail 1 view has been initialized');
+        console.log('Client detail 1 view has been initialized');
         this.render();
     },
     template: _.template($("#details_1_template").html()),
@@ -343,7 +349,7 @@ myapp.my_constructors.views.SmallReview = Backbone.View.extend({
 
 myapp.my_constructors.views.ReviewListContainer = Backbone.View.extend({
     initialize: function(){
-        console.log('Review List Item Container View initialized');
+        console.log('Review List Client Container View initialized');
         this.render();
     },
     render: function(){
@@ -374,7 +380,7 @@ myapp.my_constructors.views.ReviewListContainer = Backbone.View.extend({
 
 myapp.my_constructors.views.ItemDetail_3 = Backbone.View.extend({
     initialize: function(){
-        console.log('Item detail 3 view has been initialized');
+        console.log('Client detail 3 view has been initialized');
         this.render();
     },
     template: _.template($("#big_review_template").html()),
@@ -464,7 +470,48 @@ myapp.my_constructors.views.AddReview = Backbone.View.extend({
         'click #add_review_button': 'addReview'
     },
     addReview: function(){
-        console.log('new review added');
+
+
+        var new_review = new myapp.my_constructors.models.Review();
+        new_review.set({
+            /*review_number: 6666,*/     /*note: this property is not set because is handled by the database (autoincrement)*/
+            review_title: $(this.$("[name='review_title']")).val(),
+            review_date: Date.now(),
+            review_author: $(this.$("[name='review_author']")).val(),
+            review_pros: $(this.$("[name='review_pros']")).val(),
+            review_cons: $(this.$("[name='review_cons']")).val(),
+            review_watch_count: '0',
+            review_comments_count: '0',
+            review_useful_count: '0',
+            review_not_useful_count: '0',
+
+
+            review_attr_1: $(this.$("input[name='attr1']:checked")).val(),
+            review_attr_2: $(this.$("input[name='attr2']:checked")).val(),
+            review_attr_3: $(this.$("input[name='attr3']:checked")).val(),
+            review_attr_4: $(this.$("input[name='attr4']:checked")).val(),
+            review_attr_5: $(this.$("input[name='attr5']:checked")).val()
+        });
+
+        console.log(JSON.stringify(new_review));
+
+        var jqXHR4 = $.ajax(
+            {
+                url:"http://localhost:8080/reviews/api/rest/add_review",
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',
+                data: JSON.stringify(new_review)
+            }
+        );
+
+        jqXHR4.done(function(data){
+            console.log(data);
+        });
+
+
+
+
     }
 
 });
@@ -711,7 +758,7 @@ myapp.my_constructors.views.Search = Backbone.View.extend({
 
                 var temp_coll = new myapp.my_constructors.collections.ItemsCollection();
                 result.forEach(function(w){
-                    var i = new myapp.my_constructors.models.Item({
+                    var i = new myapp.my_constructors.models.Client({
                         item_name: w.item_name,
                         item_review_count: w.item_review_count,
                         item_rating: w.item_rating,
@@ -767,7 +814,7 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         myapp.my_objects.views.testView2 = new myapp.my_constructors.views.Menu2({
             el: '#content'
         });
-        var tee = new myapp.my_constructors.models.Item();
+        var tee = new myapp.my_constructors.models.Client();
         var col = new myapp.my_constructors.collections.ItemsCollection();
     },
     menu3Handler: function(){
@@ -781,35 +828,34 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         });
     },
     defaultHandler: function(){
-        console.log('kkkkkk');
 
-        var i1 = new myapp.my_constructors.models.Item({
+        var i1 = new myapp.my_constructors.models.Client({
             item_name: 'Robert',
             item_rating: 0.5,
             item_review_count: 200,
             item_phone: '666 666 66 66',
             item_address: 'dallas'
         });
-        var i2 = new myapp.my_constructors.models.Item({
+        var i2 = new myapp.my_constructors.models.Client({
             item_name: 'Maria',
             item_rating: 3,
             item_email: 'maria@yahoo.com',
             item_address: '1215 Test Rd. New York, NY 77458'
         });
-        var i3 = new myapp.my_constructors.models.Item({
+        var i3 = new myapp.my_constructors.models.Client({
             item_name: 'Andrew',
             item_rating: 2,
             item_phone: '999 999 99 99'
         });
-        var i4 = new myapp.my_constructors.models.Item({
+        var i4 = new myapp.my_constructors.models.Client({
             item_name: 'Zoe',
             item_rating: 4
         });
-        var i5 = new myapp.my_constructors.models.Item({
+        var i5 = new myapp.my_constructors.models.Client({
             item_name: 'Philip',
             item_rating: 1
         });
-        var i6 = new myapp.my_constructors.models.Item({
+        var i6 = new myapp.my_constructors.models.Client({
             item_name: 'Joan',
             item_rating: 5
         });
@@ -922,7 +968,7 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
             el: '#search_area'
         });
 
-        var jqXHR2 = $.ajax("http://api.openweathermap.org/data/2.5/forecast?lat=35&lon=139", {
+        var jqXHR2 = $.ajax("http://localhost:8080/reviews/api/rest/clients", {
             /*accepts: {},*/
             async: true,
             /*beforeSend: function(){},*/
@@ -1016,6 +1062,201 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         });
 
         jqXHR2.done(function(data){
+            console.log(JSON.stringify(data));
+        });
+
+        var jqXHR3 = $.ajax("http://localhost:8080/reviews/api/rest/reviews", {
+            /*accepts: {},*/
+            async: true,
+            /*beforeSend: function(){},*/
+            cache: true,
+            /*complete: function(){},*/
+            /*contents: {},*/
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            /*context: {},*/
+            converters: {"* text": window.String, "text html": true, "text json": jQuery.parseJSON, "text xml": jQuery.parseXML},
+            crossDomain: true,
+            data: {},
+            /*dataFilter: function(){},*/
+            /*dataType: "xml",*/
+            /*dataType: "html",*/
+            /*dataType: "script",*/
+            dataType: "json",
+            /*dataType: "jsonp",*/
+            /*dataType: "text",*/
+            /*error: function(){},*/
+            /*global: true,*/
+            /*headers: {},*/
+            /*ifModified: false,*/
+            /*isLocal: true,*/
+            /*jsonp: "onJSONPLoad",*/
+            /*jsonpCallback: function(){},*/
+            method:"GET",
+            mimeType: "",
+            username: "",
+            password: "",
+            processData: true,
+            /*scriptCharset: "",*/
+            statusCode: {
+                /*informational responses*/
+                100: function(){},
+                101: function(){},
+
+                /*successful responses*/
+                200: function(){
+                    console.log('20000000000000');
+                },
+                201: function(){},
+                202: function(){},
+                203: function(){},
+                204: function(){},
+                205: function(){},
+                206: function(){},
+
+                /*redirection messages*/
+                300: function(){},
+                301: function(){},
+                302: function(){},
+                303: function(){},
+                304: function(){},
+                305: function(){},
+                306: function(){},
+                307: function(){},
+                308: function(){},
+
+                /*client error responses*/
+                400: function(){},
+                401: function(){},
+                402: function(){},
+                403: function(){},
+                404: function(){},
+                405: function(){},
+                406: function(){},
+                407: function(){},
+                408: function(){},
+                409: function(){},
+                410: function(){},
+                411: function(){},
+                412: function(){},
+                413: function(){},
+                414: function(){},
+                415: function(){},
+                416: function(){},
+                417: function(){},
+
+                /*server error responses*/
+                500: function(){},
+                501: function(){},
+                502: function(){},
+                503: function(){},
+                504: function(){},
+                505: function(){}
+            }
+            /*success: function(data){
+             console.log(data);
+             },*/
+            /*timeout: 500*/
+        });
+
+        jqXHR3.done(function(data){
+            console.log(JSON.stringify(data));
+        });
+
+
+        var jqXHR4 = $.ajax("http://localhost:8080/reviews/api/rest/businesses", {
+            /*accepts: {},*/
+            async: true,
+            /*beforeSend: function(){},*/
+            cache: true,
+            /*complete: function(){},*/
+            /*contents: {},*/
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            /*context: {},*/
+            converters: {"* text": window.String, "text html": true, "text json": jQuery.parseJSON, "text xml": jQuery.parseXML},
+            crossDomain: true,
+            data: {},
+            /*dataFilter: function(){},*/
+            /*dataType: "xml",*/
+            /*dataType: "html",*/
+            /*dataType: "script",*/
+            dataType: "json",
+            /*dataType: "jsonp",*/
+            /*dataType: "text",*/
+            /*error: function(){},*/
+            /*global: true,*/
+            /*headers: {},*/
+            /*ifModified: false,*/
+            /*isLocal: true,*/
+            /*jsonp: "onJSONPLoad",*/
+            /*jsonpCallback: function(){},*/
+            method:"GET",
+            mimeType: "",
+            username: "",
+            password: "",
+            processData: true,
+            /*scriptCharset: "",*/
+            statusCode: {
+                /*informational responses*/
+                100: function(){},
+                101: function(){},
+
+                /*successful responses*/
+                200: function(){
+                    console.log('20000000000000');
+                },
+                201: function(){},
+                202: function(){},
+                203: function(){},
+                204: function(){},
+                205: function(){},
+                206: function(){},
+
+                /*redirection messages*/
+                300: function(){},
+                301: function(){},
+                302: function(){},
+                303: function(){},
+                304: function(){},
+                305: function(){},
+                306: function(){},
+                307: function(){},
+                308: function(){},
+
+                /*client error responses*/
+                400: function(){},
+                401: function(){},
+                402: function(){},
+                403: function(){},
+                404: function(){},
+                405: function(){},
+                406: function(){},
+                407: function(){},
+                408: function(){},
+                409: function(){},
+                410: function(){},
+                411: function(){},
+                412: function(){},
+                413: function(){},
+                414: function(){},
+                415: function(){},
+                416: function(){},
+                417: function(){},
+
+                /*server error responses*/
+                500: function(){},
+                501: function(){},
+                502: function(){},
+                503: function(){},
+                504: function(){},
+                505: function(){}
+            }
+            /*success: function(data){
+             console.log(data);
+             },*/
+            /*timeout: 500*/
+        });
+
+        jqXHR4.done(function(data){
             console.log(JSON.stringify(data));
         });
 
