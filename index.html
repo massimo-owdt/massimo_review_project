@@ -83,21 +83,21 @@
 
 <script type="text/template" id="single_item_template">
     <div class="list_item">
-        <div class="item_name"><span><%= item_name %></span>
+        <div class="item_name"><span><%= clientName %></span>
             <div class="item_rating animated">
                 <div class="rateYo"></div>
             </div>
         </div>
-        <div class="item_address"><%= item_address %><div class="review_count">(<%= item_review_count %>) reviews</div></div>
-        <div class="item_phone"><%= item_phone %></div>
-        <div class="item_email"><%= item_email %></div>
+        <div class="item_address"><%= clientAddress %><div class="review_count">() reviews</div></div>
+        <div class="item_phone"><%= clientPhone %></div>
+        <div class="item_email"><%= clientEmail %></div>
         <div class="item_add_review">add review </div>
     </div>
 </script>
 
 <script type="text/template" id="details_1_template">
     <div class="animated">
-        <div class="final_rating animated flash"><%= item_rating %></div>
+
         <canvas id="myChart" width="400" height="300"></canvas>
         <canvas id="myChart2" width="400" height="250"></canvas>
     </div>
@@ -105,26 +105,26 @@
 
 <script type="text/template" id="small_review_template">
     <div class="review_item animated fadeIn">
-        <!--<div class="review_number"><%= review_number %></div>-->
-        <div class="review_date"><%= review_date %></div>
-        <div class="review_title"><%= review_title %></div>
+        <!--<div class="review_number"><%= reviewId %></div>-->
+        <div class="review_date"><%= reviewDate %></div>
+        <div class="review_title"><%= reviewTitle %></div>
         <div class="review_stats">
-            <i class="fa fa-eye"></i> <%= review_watch_count %>
-            <i class="fa fa-comments"></i> <%= review_comments_count %>
-            <i class="fa fa-thumbs-up"></i> <%= review_useful_count %>
-            <i class="fa fa-thumbs-down"></i> <%= review_not_useful_count %>
+            <i class="fa fa-eye"></i> <%= reviewWatchCount %>
+
+            <i class="fa fa-thumbs-up"></i> <%= reviewUsefulCount %>
+            <i class="fa fa-thumbs-down"></i> <%= reviewNotUsefulCount %>
         </div>
     </div>
 </script>
 
 <script type="text/template" id="big_review_template">
     <div class="animated">
-        <div class="review_author"><span class="author_underline">Written by: </span><%= review_author %></div>
+        <div class="review_author"><span class="author_underline">Written by: </span><%= reviewTitle %></div>
         <div class="review_details">
             <div class="pros_title">PROS:</div>
-            <div class="review_text"><%= review_pros %></div>
+            <div class="review_text"><%= reviewPros %></div>
             <div class="cons_title">CONS:</div>
-            <div class="review_text"><%= review_cons %></div>
+            <div class="review_text"><%= reviewCons %></div>
             <!--<div class="grades_summary">
                 <canvas id="myChart3" width="400" height="250"></canvas>
             </div>-->

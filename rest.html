@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+rest
+
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/underscore/underscore-min.js"></script>
+<script src="bower_components/backbone/backbone.js"></script>
+<script>
+
+    var client = Backbone.Model.extend({
+        defaults: {
+            "clientId": 0,
+            "clientName": "default name",
+            "clientAddress": "default address",
+            "clientPhone": "default phone",
+            "clientEmail": "default mail",
+            "clientWebsite": "default website",
+            "clientCreatedDate": "default created date",
+            "createdByBusinessId": 0
+        }
+    });
+
+    var review = Backbone.Model.extend({
+        defaults: {
+            "reviewId": 0,
+            "reviewTitle": "default title",
+            "reviewDate": "default date",
+            "businessId": 0,
+            "reviewPros": "default pros",
+            "reviewCons": "default cons",
+            "clientId": 0,
+            "reviewAttr1": 0,
+            "reviewAttr2": 0,
+            "reviewAttr3": 0,
+            "reviewAttr4": 0,
+            "reviewAttr5": 0,
+            "reviewWatchCount": 0,
+            "reviewUsefulCount": 0,
+            "reviewNotUsefulCount": 0
+        }
+
+    });
+
+    var business = Backbone.Model.extend({
+        defaults: {
+            "businessId": 0,
+            "businessName": "default name",
+            "businessAddress": "default address",
+            "businessPhone": "default phone",
+            "businessEmail": "default mail",
+            "industryId": 0,
+            "createdDate": "default created date",
+            "businessWebsite": "default website",
+            "active": false
+        }
+    });
+
+    var review_collection = Backbone.Collection.extend({
+        model: review,
+        url: "http://localhost:8080/reviews/api/rest/reviews"
+    });
+
+    var client_collection = Backbone.Collection.extend({
+        model: client,
+        url: "http://localhost:8080/reviews/api/rest/clients"
+    });
+
+    var business_collection = Backbone.Collection.extend({
+        model: business,
+        url: "http://localhost:8080/reviews/api/rest/businesses"
+    });
+
+
+    var myReviews = new review_collection();
+    myReviews.fetch({
+        reset: true,
+        success: function(response){
+            console.log('SUCCESS');
+            console.log(JSON.stringify(response));
+        },
+        error: function(){
+            console.log('ERROR');
+        }
+
+    });
+
+
+    var myClients = new client_collection();
+    myClients.fetch({
+        reset: true,
+        success: function(response){
+            console.log('SUCCESS');
+            console.log(JSON.stringify(response));
+        },
+        error: function(){
+            console.log('ERROR');
+        }
+    });
+
+    var myBusinesses = new business_collection();
+    myBusinesses.fetch({
+        reset: true,
+        success: function(response){
+            console.log('SUCCESS');
+            console.log(JSON.stringify(response));
+        },
+        error: function(){
+            console.log('ERROR');
+        }
+    });
+
+
+    /*TESTING SAVE METHOD*/
+
+    /*var myC = new client({
+        "clientName": "isabella"
+    });
+    console.log(JSON.stringify(myC));
+
+    myC.save({},{
+        wait: true,
+        patch: true,
+        success: function(response){
+            console.log('model SAVED');
+            console.log(JSON.stringify(response));
+        },
+        error: function(){
+            console.log('model NOT SAVED');
+        }
+    });*/
+
+
+
+</script>
+
+
+</body>
+</html>

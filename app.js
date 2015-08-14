@@ -22,69 +22,92 @@ var myapp = {
 /*MODELS*/
 myapp.my_constructors.models.Client = Backbone.Model.extend({
     initialize: function(){
-        /*console.log('A new client has been created');*/
+        /*registering some events for this model*/
+        this.on("change", this.model_change, this);
     },
     defaults: {
-        client_id: '0',
-        item_name: 'My Company LLC',
-        item_review_count: 120,
-        item_rating: 5,
-        item_address: '1384 Testing Rd. Houston, TX',
-        item_phone: '555 555 55 55',
-        item_email: 'themail@gmail.com'
+        "clientId": 0,
+        "clientName": "default name",
+        "clientAddress": "default address",
+        "clientPhone": "default phone",
+        "clientEmail": "default mail",
+        "clientWebsite": "default website",
+        "clientCreatedDate": "default created date",
+        "createdByBusinessId": 0
+    },
+    model_change: function(){
     }
 });
 
 myapp.my_constructors.models.Review = Backbone.Model.extend({
-    initialize: function(){
-        console.log('A new Review object has been created');
-    },
+    initialize: function(){},
     defaults: {
-        review_number: 6666,
-        review_title: 'Default Title',
-        review_date: '1982-04-23T18:25:43.511Z',
-        review_author: 'Francois Voltaire',
-        review_pros: 'Default Pros',
-        review_cons: 'Defualt Cons',
-        review_watch_count: '0',
-        review_comments_count: '0',
-        review_useful_count: '0',
-        review_not_useful_count: '0',
-        review_attr_1: '0',
-        review_attr_2: '0',
-        review_attr_3: '0',
-        review_attr_4: '0',
-        review_attr_5: '0'
+        "reviewId": 0,
+        "reviewTitle": "default title",
+        "reviewDate": "default date",
+        "businessId": 0,
+        "reviewPros": "default pros",
+        "reviewCons": "default cons",
+        "clientId": 0,
+        "reviewAttr1": 0,
+        "reviewAttr2": 0,
+        "reviewAttr3": 0,
+        "reviewAttr4": 0,
+        "reviewAttr5": 0,
+        "reviewWatchCount": 0,
+        "reviewUsefulCount": 0,
+        "reviewNotUsefulCount": 0
     }
 });
 
 
-/*REST SERVICE TEST MODEL*/
-myapp.my_constructors.models.WPPost = Backbone.Model.extend({});
+myapp.my_constructors.models.Business = Backbone.Model.extend({
+    initialize: function(){},
+    defaults: {
+        "businessId": 0,
+        "businessName": "default name",
+        "businessAddress": "default address",
+        "businessPhone": "default phone",
+        "businessEmail": "default email",
+        "industryId": 0,
+        "createdDate": "default date",
+        "businessWebsite": "default website",
+        "active": 0
+    }
+});
 
+myapp.my_constructors.models.Industry = Backbone.Model.extend({
+    initialize: function(){},
+    defaults: {
+        industryId: "0",
+        industryName: "no name"
+    }
+});
 
 
 
 /*COLLECTIONS*/
-myapp.my_constructors.collections.ItemsCollection = Backbone.Collection.extend({
+myapp.my_constructors.collections.ClientsCollection = Backbone.Collection.extend({
     model: myapp.my_constructors.models.Client,
-    initialize: function(){
-        console.log('A new items collection has been initialized');
-    }
+    initialize: function(){},
+    url: "http://localhost:8080/reviews/api/rest/clients"
 });
 
 myapp.my_constructors.collections.ReviewsCollection = Backbone.Collection.extend({
     model: myapp.my_constructors.models.Review,
     initialize: function(){
-        console.log('A new review collection has been initialized');
+        console.log('a new review collection has been initialized');
+    },
+    url: "http://localhost:8080/reviews/api/rest/reviews"
+});
+
+myapp.my_constructors.collections.IndustriesCollection = Backbone.Collection.extend({
+    model: myapp.my_constructors.models.Industry,
+    initialize: function(){
+        console.log('a new industry collection has been created');
     }
 });
 
-/*REST SERVICE TEST COLLECTION*/
-myapp.my_constructors.collections.PostsColl = Backbone.Collection.extend({
-    model: myapp.my_constructors.models.WPPost,
-    url: 'http://eda.owdt.com/wordpress_1/wp-json/posts?type[]=movies'
-});
 
 
 /*VIEWS*/
@@ -129,16 +152,15 @@ myapp.my_constructors.views.Menu4 = Backbone.View.extend({
     }
 });
 
-myapp.my_constructors.views.SingleItem = Backbone.View.extend({
+myapp.my_constructors.views.SingleClient = Backbone.View.extend({
     initialize: function(){
-        console.log('Single Client view initialized');
         this.render();
     },
     template: _.template($("#single_item_template").html()),
     render: function(){
         this.$el.html(this.template(this.model.toJSON()));
         this.$('.rateYo').rateYo({
-            rating: this.model.attributes.item_rating,
+            rating: 2/*this.model.attributes.item_rating*/,
             /*rating: 2.5,*/
             /*maxValue: 5,*/
             precision: 0,
@@ -150,8 +172,6 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
             readOnly: true
             /*spacing: "2px"*/
         });
-
-        console.log(this.model.attributes.item_rating);
         return this;
     },
     events: {
@@ -159,17 +179,29 @@ myapp.my_constructors.views.SingleItem = Backbone.View.extend({
         'click .item_add_review': 'add_review'
     },
     loadDetails: function(){
-        console.log('I have been clicked');
-        console.log(this.$el);
+
         $(this.$('.list_item')).css({
-            /*"background-color":"rgba(251,46,69,0.2)",*/
             "background-color":"rgba(255,212,84,0.2)"
         });
 
-        myapp.my_objects.views.Details_1 = new myapp.my_constructors.views.ItemDetail_1({
+
+        new myapp.my_constructors.views.ItemDetail_1({
             el: '#item_details_1',
             model: this.model
         });
+
+        new myapp.my_constructors.views.ReviewListFilters({
+            el: '#reviews_header'
+        });
+
+        $('#reviews_list').html('');
+        $('#item_details_3').html('');
+
+        new myapp.my_constructors.views.ReviewListContainer({
+            el: '#reviews_list',
+            collection: myapp.my_objects.collections.ReviewsCollection
+        });
+
         NProgress.start();
         NProgress.done();
     },
@@ -191,11 +223,14 @@ myapp.my_constructors.views.ListItemContainer = Backbone.View.extend({
         this.render();
     },
     render: function(){
-        _.each(this.collection.models, function(item){
-            console.log(item.toJSON());
-            var singleItemView = new myapp.my_constructors.views.SingleItem({model: item});
-            this.$el.append(singleItemView.render().el);
+
+        this.collection.each(function(model){
+            var SingleClientView = new myapp.my_constructors.views.SingleClient({
+                model: model
+            });
+            this.$el.append(SingleClientView.render().el);
         }, this);
+
     },
     events: {
         'click .sort': 'sort_by_name'
@@ -338,7 +373,7 @@ myapp.my_constructors.views.SmallReview = Backbone.View.extend({
             /*"background-color":"rgba(251,46,69,0.2)",*/
             "background-color":"rgba(255,212,84,0.2)"
         });
-        myapp.my_objects.views.Details_3 = new myapp.my_constructors.views.ItemDetail_3({
+        new myapp.my_constructors.views.ItemDetail_3({
             el: '#item_details_3',
             model: this.model
         });
@@ -353,11 +388,14 @@ myapp.my_constructors.views.ReviewListContainer = Backbone.View.extend({
         this.render();
     },
     render: function(){
-        _.each(this.collection.models, function(item){
-            console.log(item.toJSON());
-            var SmallReviewView = new myapp.my_constructors.views.SmallReview({model: item});
+
+        this.collection.each(function(model){
+            var SmallReviewView = new myapp.my_constructors.views.SmallReview({
+                model: model
+            });
             this.$el.append(SmallReviewView.render().el);
         }, this);
+
     },
     events: {
         'click .sort_date': 'sort_by_date'
@@ -471,7 +509,6 @@ myapp.my_constructors.views.AddReview = Backbone.View.extend({
     },
     addReview: function(){
 
-
         var new_review = new myapp.my_constructors.models.Review();
         new_review.set({
             /*review_number: 6666,*/     /*note: this property is not set because is handled by the database (autoincrement)*/
@@ -508,12 +545,7 @@ myapp.my_constructors.views.AddReview = Backbone.View.extend({
         jqXHR4.done(function(data){
             console.log(data);
         });
-
-
-
-
     }
-
 });
 
 myapp.my_constructors.views.ClientListFilters = Backbone.View.extend({
@@ -702,7 +734,6 @@ myapp.my_constructors.views.ReviewListFilters = Backbone.View.extend({
 
 myapp.my_constructors.views.Search = Backbone.View.extend({
     initialize: function(){
-        console.log('The SEARCH view has been initialized');
         this.render();
     },
     template: _.template($("#search_template").html()),
@@ -716,25 +747,24 @@ myapp.my_constructors.views.Search = Backbone.View.extend({
     search_collection: function(){
 
         if ($('#search_box').val() === "") {
-            console.log('empty');
+
             $('#clients_list').html('');
-            var vi = new myapp.my_constructors.views.ListItemContainer({
+            new myapp.my_constructors.views.ListItemContainer({
                 el: '#clients_list',
-                collection: myapp.my_objects.collections.collec
+                collection: myapp.my_objects.collections.ClientsCollection
             });
         } else {
-            console.log('NOT empty');
-            console.log('keyup');
+
             var str = $('#search_box').val();
 
-            var x = JSON.stringify(myapp.my_objects.collections.collec.models);
+            var x = JSON.stringify(myapp.my_objects.collections.ClientsCollection.models);
             console.log(JSON.stringify(x));
 
             var y = JSON.parse(x);
             console.log(y);
 
             var options = {
-                keys: ['item_name', 'item_address', 'item_email'],
+                keys: ['clientName', 'clientAddress', 'clientEmail'],
                 caseSensitive: false,
                 includeScore: false,
                 shouldSort: true,
@@ -750,16 +780,14 @@ myapp.my_constructors.views.Search = Backbone.View.extend({
             console.log(result);
 
             if (result.length == 0) {
-                var h = new myapp.my_constructors.views.Confused({
+                new myapp.my_constructors.views.Confused({
                     el: '#clients_list'
                 });
-
             } else {
-
-                var temp_coll = new myapp.my_constructors.collections.ItemsCollection();
+                var temp_coll = new myapp.my_constructors.collections.ClientsCollection();
                 result.forEach(function(w){
                     var i = new myapp.my_constructors.models.Client({
-                        item_name: w.item_name,
+                        clientName: w.clientName,
                         item_review_count: w.item_review_count,
                         item_rating: w.item_rating,
                         item_address: w.item_address,
@@ -771,7 +799,7 @@ myapp.my_constructors.views.Search = Backbone.View.extend({
 
                 $('#clients_list').html('');
 
-                var v = new myapp.my_constructors.views.ListItemContainer({
+                new myapp.my_constructors.views.ListItemContainer({
                     el: '#clients_list',
                     collection: temp_coll
                 });
@@ -814,8 +842,6 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         myapp.my_objects.views.testView2 = new myapp.my_constructors.views.Menu2({
             el: '#content'
         });
-        var tee = new myapp.my_constructors.models.Client();
-        var col = new myapp.my_constructors.collections.ItemsCollection();
     },
     menu3Handler: function(){
         myapp.my_objects.views.testView3 = new myapp.my_constructors.views.Menu3({
@@ -826,439 +852,53 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         myapp.my_objects.views.testView4 = new myapp.my_constructors.views.Menu4({
             el: '#content'
         });
+        console.log($.isEmptyObject(myapp.my_objects.collections.ClientsCollection));
     },
     defaultHandler: function(){
 
-        var i1 = new myapp.my_constructors.models.Client({
-            item_name: 'Robert',
-            item_rating: 0.5,
-            item_review_count: 200,
-            item_phone: '666 666 66 66',
-            item_address: 'dallas'
-        });
-        var i2 = new myapp.my_constructors.models.Client({
-            item_name: 'Maria',
-            item_rating: 3,
-            item_email: 'maria@yahoo.com',
-            item_address: '1215 Test Rd. New York, NY 77458'
-        });
-        var i3 = new myapp.my_constructors.models.Client({
-            item_name: 'Andrew',
-            item_rating: 2,
-            item_phone: '999 999 99 99'
-        });
-        var i4 = new myapp.my_constructors.models.Client({
-            item_name: 'Zoe',
-            item_rating: 4
-        });
-        var i5 = new myapp.my_constructors.models.Client({
-            item_name: 'Philip',
-            item_rating: 1
-        });
-        var i6 = new myapp.my_constructors.models.Client({
-            item_name: 'Joan',
-            item_rating: 5
-        });
+        myapp.my_objects.collections.ClientsCollection = new myapp.my_constructors.collections.ClientsCollection();
+        myapp.my_objects.collections.ClientsCollection.fetch({
+            reset: true,
+            success: function(response){
 
-        myapp.my_objects.collections.collec = new myapp.my_constructors.collections.ItemsCollection();
-        myapp.my_objects.collections.collec.add(i1);
-        myapp.my_objects.collections.collec.add(i2);
-        myapp.my_objects.collections.collec.add(i3);
-        myapp.my_objects.collections.collec.add(i4);
-        myapp.my_objects.collections.collec.add(i5);
-        myapp.my_objects.collections.collec.add(i6);
+                console.log('SUCCESS');
+                console.log(JSON.stringify(response));
 
-        /*console.log(collec.toJSON());*/
-
-        var c_header = new myapp.my_constructors.views.ClientListFilters({
-            el: '#clients_header'
-        });
-        var vi = new myapp.my_constructors.views.ListItemContainer({
-            el: '#clients_list',
-            collection: myapp.my_objects.collections.collec
-        });
-
-
-
-        console.log('ooooooo');
-        var r = new myapp.my_constructors.models.Review();
-        console.log(r);
-
-
-
-        myapp.my_objects.collections.reviews = new myapp.my_constructors.collections.ReviewsCollection();
-        var r1 = new myapp.my_constructors.models.Review();
-        var r2 = new myapp.my_constructors.models.Review();
-        var r3 = new myapp.my_constructors.models.Review();
-        var r4 = new myapp.my_constructors.models.Review({
-            review_title: 'AAAAAAAAA',
-            review_author: 'Massimo Penzo',
-            review_cons: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX',
-            review_date: '2012-04-23T18:25:43.511Z',
-            review_watch_count: '10',
-            review_comments_count: '10',
-            review_useful_count: '30',
-            review_not_useful_count: '0'
-        });
-        var r5 = new myapp.my_constructors.models.Review({
-            review_title: 'BBBBBB',
-            review_number: 2222,
-            review_cons: 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO',
-            review_date: '2013-04-23T18:25:43.511Z',
-            review_watch_count: '20',
-            review_comments_count: '20',
-            review_useful_count: '20',
-            review_not_useful_count: '0'
-        });
-        var r6 = new myapp.my_constructors.models.Review({
-            review_title: 'CCCCCCCC',
-            review_number: 2222,
-            review_cons: 'OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO',
-            review_date: '2014-04-23T18:25:43.511Z',
-            review_watch_count: '30',
-            review_comments_count: '15',
-            review_useful_count: '10',
-            review_not_useful_count: '0'
-        });
-        var r7 = new myapp.my_constructors.models.Review();
-        var r8 = new myapp.my_constructors.models.Review();
-        var r9 = new myapp.my_constructors.models.Review();
-        var r10 = new myapp.my_constructors.models.Review();
-        var r11 = new myapp.my_constructors.models.Review();
-        var r12 = new myapp.my_constructors.models.Review();
-        var r13 = new myapp.my_constructors.models.Review();
-
-        myapp.my_objects.collections.reviews.add(r1);
-        myapp.my_objects.collections.reviews.add(r2);
-        myapp.my_objects.collections.reviews.add(r3);
-        myapp.my_objects.collections.reviews.add(r4);
-        myapp.my_objects.collections.reviews.add(r5);
-        myapp.my_objects.collections.reviews.add(r6);
-        myapp.my_objects.collections.reviews.add(r7);
-        myapp.my_objects.collections.reviews.add(r8);
-        myapp.my_objects.collections.reviews.add(r9);
-        myapp.my_objects.collections.reviews.add(r10);
-        myapp.my_objects.collections.reviews.add(r11);
-        myapp.my_objects.collections.reviews.add(r12);
-        myapp.my_objects.collections.reviews.add(r13);
-
-
-        var tt = new myapp.my_constructors.views.ReviewListFilters({
-            el: '#reviews_header'
-        });
-        var vi2 = new myapp.my_constructors.views.ReviewListContainer({
-            el: '#reviews_list',
-            collection: myapp.my_objects.collections.reviews
-        });
-
-
-        /*var rest = new myapp.my_constructors.collections.PostsColl();
-
-        rest.fetch({
-            success: function(){
-                console.log('SUCCESS!!');
+                /*initializing sub-views of panel 1*/
+                new myapp.my_constructors.views.ClientListFilters({
+                    el: '#clients_header'
+                });
+                new myapp.my_constructors.views.ListItemContainer({
+                    el: '#clients_list',
+                    collection: myapp.my_objects.collections.ClientsCollection
+                });
             },
             error: function(){
-                console.log('ERROR!!');
+                console.log('ERROR');
             }
-        });
-        console.log(rest);*/
 
-        var search = new myapp.my_constructors.views.Search({
+        });
+
+
+        myapp.my_objects.collections.ReviewsCollection = new myapp.my_constructors.collections.ReviewsCollection();
+        myapp.my_objects.collections.ReviewsCollection.fetch({
+            reset: true,
+            success: function(response){
+
+                console.log('SUCCESS');
+                console.log(JSON.stringify(response));
+            },
+            error: function(){
+                console.log('ERROR');
+            }
+
+        });
+
+
+        new myapp.my_constructors.views.Search({
             el: '#search_area'
         });
 
-        var jqXHR2 = $.ajax("http://localhost:8080/reviews/api/rest/clients", {
-            /*accepts: {},*/
-            async: true,
-            /*beforeSend: function(){},*/
-            cache: true,
-            /*complete: function(){},*/
-            /*contents: {},*/
-            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-            /*context: {},*/
-            converters: {"* text": window.String, "text html": true, "text json": jQuery.parseJSON, "text xml": jQuery.parseXML},
-            crossDomain: true,
-            data: {},
-            /*dataFilter: function(){},*/
-            /*dataType: "xml",*/
-            /*dataType: "html",*/
-            /*dataType: "script",*/
-            dataType: "json",
-            /*dataType: "jsonp",*/
-            /*dataType: "text",*/
-            /*error: function(){},*/
-            /*global: true,*/
-            /*headers: {},*/
-            /*ifModified: false,*/
-            /*isLocal: true,*/
-            /*jsonp: "onJSONPLoad",*/
-            /*jsonpCallback: function(){},*/
-            method:"GET",
-            mimeType: "",
-            username: "",
-            password: "",
-            processData: true,
-            /*scriptCharset: "",*/
-            statusCode: {
-                /*informational responses*/
-                100: function(){},
-                101: function(){},
-
-                /*successful responses*/
-                200: function(){
-                    console.log('20000000000000');
-                },
-                201: function(){},
-                202: function(){},
-                203: function(){},
-                204: function(){},
-                205: function(){},
-                206: function(){},
-
-                /*redirection messages*/
-                300: function(){},
-                301: function(){},
-                302: function(){},
-                303: function(){},
-                304: function(){},
-                305: function(){},
-                306: function(){},
-                307: function(){},
-                308: function(){},
-
-                /*client error responses*/
-                400: function(){},
-                401: function(){},
-                402: function(){},
-                403: function(){},
-                404: function(){},
-                405: function(){},
-                406: function(){},
-                407: function(){},
-                408: function(){},
-                409: function(){},
-                410: function(){},
-                411: function(){},
-                412: function(){},
-                413: function(){},
-                414: function(){},
-                415: function(){},
-                416: function(){},
-                417: function(){},
-
-                /*server error responses*/
-                500: function(){},
-                501: function(){},
-                502: function(){},
-                503: function(){},
-                504: function(){},
-                505: function(){}
-            }
-            /*success: function(data){
-                console.log(data);
-            },*/
-            /*timeout: 500*/
-        });
-
-        jqXHR2.done(function(data){
-            console.log(JSON.stringify(data));
-        });
-
-        var jqXHR3 = $.ajax("http://localhost:8080/reviews/api/rest/reviews", {
-            /*accepts: {},*/
-            async: true,
-            /*beforeSend: function(){},*/
-            cache: true,
-            /*complete: function(){},*/
-            /*contents: {},*/
-            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-            /*context: {},*/
-            converters: {"* text": window.String, "text html": true, "text json": jQuery.parseJSON, "text xml": jQuery.parseXML},
-            crossDomain: true,
-            data: {},
-            /*dataFilter: function(){},*/
-            /*dataType: "xml",*/
-            /*dataType: "html",*/
-            /*dataType: "script",*/
-            dataType: "json",
-            /*dataType: "jsonp",*/
-            /*dataType: "text",*/
-            /*error: function(){},*/
-            /*global: true,*/
-            /*headers: {},*/
-            /*ifModified: false,*/
-            /*isLocal: true,*/
-            /*jsonp: "onJSONPLoad",*/
-            /*jsonpCallback: function(){},*/
-            method:"GET",
-            mimeType: "",
-            username: "",
-            password: "",
-            processData: true,
-            /*scriptCharset: "",*/
-            statusCode: {
-                /*informational responses*/
-                100: function(){},
-                101: function(){},
-
-                /*successful responses*/
-                200: function(){
-                    console.log('20000000000000');
-                },
-                201: function(){},
-                202: function(){},
-                203: function(){},
-                204: function(){},
-                205: function(){},
-                206: function(){},
-
-                /*redirection messages*/
-                300: function(){},
-                301: function(){},
-                302: function(){},
-                303: function(){},
-                304: function(){},
-                305: function(){},
-                306: function(){},
-                307: function(){},
-                308: function(){},
-
-                /*client error responses*/
-                400: function(){},
-                401: function(){},
-                402: function(){},
-                403: function(){},
-                404: function(){},
-                405: function(){},
-                406: function(){},
-                407: function(){},
-                408: function(){},
-                409: function(){},
-                410: function(){},
-                411: function(){},
-                412: function(){},
-                413: function(){},
-                414: function(){},
-                415: function(){},
-                416: function(){},
-                417: function(){},
-
-                /*server error responses*/
-                500: function(){},
-                501: function(){},
-                502: function(){},
-                503: function(){},
-                504: function(){},
-                505: function(){}
-            }
-            /*success: function(data){
-             console.log(data);
-             },*/
-            /*timeout: 500*/
-        });
-
-        jqXHR3.done(function(data){
-            console.log(JSON.stringify(data));
-        });
-
-
-        var jqXHR4 = $.ajax("http://localhost:8080/reviews/api/rest/businesses", {
-            /*accepts: {},*/
-            async: true,
-            /*beforeSend: function(){},*/
-            cache: true,
-            /*complete: function(){},*/
-            /*contents: {},*/
-            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-            /*context: {},*/
-            converters: {"* text": window.String, "text html": true, "text json": jQuery.parseJSON, "text xml": jQuery.parseXML},
-            crossDomain: true,
-            data: {},
-            /*dataFilter: function(){},*/
-            /*dataType: "xml",*/
-            /*dataType: "html",*/
-            /*dataType: "script",*/
-            dataType: "json",
-            /*dataType: "jsonp",*/
-            /*dataType: "text",*/
-            /*error: function(){},*/
-            /*global: true,*/
-            /*headers: {},*/
-            /*ifModified: false,*/
-            /*isLocal: true,*/
-            /*jsonp: "onJSONPLoad",*/
-            /*jsonpCallback: function(){},*/
-            method:"GET",
-            mimeType: "",
-            username: "",
-            password: "",
-            processData: true,
-            /*scriptCharset: "",*/
-            statusCode: {
-                /*informational responses*/
-                100: function(){},
-                101: function(){},
-
-                /*successful responses*/
-                200: function(){
-                    console.log('20000000000000');
-                },
-                201: function(){},
-                202: function(){},
-                203: function(){},
-                204: function(){},
-                205: function(){},
-                206: function(){},
-
-                /*redirection messages*/
-                300: function(){},
-                301: function(){},
-                302: function(){},
-                303: function(){},
-                304: function(){},
-                305: function(){},
-                306: function(){},
-                307: function(){},
-                308: function(){},
-
-                /*client error responses*/
-                400: function(){},
-                401: function(){},
-                402: function(){},
-                403: function(){},
-                404: function(){},
-                405: function(){},
-                406: function(){},
-                407: function(){},
-                408: function(){},
-                409: function(){},
-                410: function(){},
-                411: function(){},
-                412: function(){},
-                413: function(){},
-                414: function(){},
-                415: function(){},
-                416: function(){},
-                417: function(){},
-
-                /*server error responses*/
-                500: function(){},
-                501: function(){},
-                502: function(){},
-                503: function(){},
-                504: function(){},
-                505: function(){}
-            }
-            /*success: function(data){
-             console.log(data);
-             },*/
-            /*timeout: 500*/
-        });
-
-        jqXHR4.done(function(data){
-            console.log(JSON.stringify(data));
-        });
 
     }
 });
