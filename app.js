@@ -197,9 +197,25 @@ myapp.my_constructors.views.SingleClient = Backbone.View.extend({
         $('#reviews_list').html('');
         $('#item_details_3').html('');
 
+        /*new myapp.my_constructors.views.ReviewListContainer({
+         el: '#reviews_list',
+         collection: myapp.my_objects.collections.ReviewsCollection
+         });*/
+
+        var filtered_reviews = myapp.my_objects.collections.ReviewsCollection.clone();
+
+        filtered_reviews.each(function(review){
+
+            if (review.get("clientId") == 5){
+                filtered_reviews.remove(review);
+            }
+
+        }, this);
+
+
         new myapp.my_constructors.views.ReviewListContainer({
             el: '#reviews_list',
-            collection: myapp.my_objects.collections.ReviewsCollection
+            collection: filtered_reviews
         });
 
         NProgress.start();
@@ -292,7 +308,7 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
 
         /*CHART #1*/
         var data = {
-            labels: ["PRICE", "QUALITY", "RESPONSIVENESS", "PUNCTUALITY", "DESIGN", "ORGANIZATION", "COLOR"],
+            labels: ["ATTR_1", "ATTR_2", "ATTR_3", "ATTR_4", "ATTR_5"],
             datasets: [
                 {
                     label: "My First dataset",
@@ -302,18 +318,14 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
                     pointStrokeColor: "#000000",
                     pointHighlightFill: "#000000",
                     pointHighlightStroke: "#000000",
-                    data: [65, 59, 90, 81, 56, 55, 40]
-                }/*,
-                 {
-                 label: "My Second dataset",
-                 fillColor: "rgba(151,187,205,0.2)",
-                 strokeColor: "rgba(151,187,205,1)",
-                 pointColor: "#000000",
-                 pointStrokeColor: "#fff",
-                 pointHighlightFill: "#fff",
-                 pointHighlightStroke: "rgba(151,187,205,1)",
-                 data: [28, 48, 40, 19, 96, 27, 100]
-                 }*/
+                    data: [
+                        this.model.get("Avg_reviewAttr1"),
+                        this.model.get("Avg_reviewAttr2"),
+                        this.model.get("Avg_reviewAttr3"),
+                        this.model.get("Avg_reviewAttr4"),
+                        this.model.get("Avg_reviewAttr5")
+                    ]
+                }
             ]
         };
         var ctx = document.getElementById("myChart").getContext("2d");
@@ -566,12 +578,12 @@ myapp.my_constructors.views.ClientListFilters = Backbone.View.extend({
     },
     sort_by_name_desc: function(){
 
-        myapp.my_objects.collections.Items_sorted_name_desc  = myapp.my_objects.collections.collec.clone();
+        myapp.my_objects.collections.Items_sorted_name_desc  = myapp.my_objects.collections.ClientsCollection.clone();
         console.log(JSON.stringify(myapp.my_objects.collections.Items_sorted_name_desc));
 
         myapp.my_objects.collections.Items_sorted_name_desc.models.sort(function(a, b){
-            var nameA = a.attributes.item_name.toLowerCase();
-            var nameB = b.attributes.item_name.toLowerCase();
+            var nameA = a.attributes.clientName.toLowerCase();
+            var nameB = b.attributes.clientName.toLowerCase();
             if (nameA < nameB){
                 return -1;
             } //sort string ascending
@@ -584,18 +596,18 @@ myapp.my_constructors.views.ClientListFilters = Backbone.View.extend({
         /*cleaning view before new rendering*/
         $('#clients_list').html('');
 
-        var vi2 = new myapp.my_constructors.views.ListItemContainer({
+        new myapp.my_constructors.views.ListItemContainer({
             el: '#clients_list',
             collection: myapp.my_objects.collections.Items_sorted_name_desc
         });
     },
     sort_by_name_asc: function(){
-        myapp.my_objects.collections.Items_sorted_name_asc  = myapp.my_objects.collections.collec.clone();
+        myapp.my_objects.collections.Items_sorted_name_asc  = myapp.my_objects.collections.ClientsCollection.clone();
         console.log(JSON.stringify(myapp.my_objects.collections.Items_sorted_name_asc));
 
         myapp.my_objects.collections.Items_sorted_name_asc.models.sort(function(a, b){
-            var nameA = a.attributes.item_name.toLowerCase();
-            var nameB = b.attributes.item_name.toLowerCase();
+            var nameA = a.attributes.clientName.toLowerCase();
+            var nameB = b.attributes.clientName.toLowerCase();
             if (nameA > nameB){
                 return -1;
             } //sort string ascending
@@ -604,19 +616,19 @@ myapp.my_constructors.views.ClientListFilters = Backbone.View.extend({
             }
             return 0; //default return value (no sorting)
         });
-
+        console.trace();
         /*cleaning view before new rendering*/
         $('#clients_list').html('');
 
-        var vi3 = new myapp.my_constructors.views.ListItemContainer({
+        new myapp.my_constructors.views.ListItemContainer({
             el: '#clients_list',
             collection: myapp.my_objects.collections.Items_sorted_name_asc
         });
     },
     sort_by_rating_desc: function(){
-        myapp.my_objects.collections.Items_sorted_rating_desc  = myapp.my_objects.collections.collec.clone();
-        console.log(JSON.stringify(myapp.my_objects.collections.Items_sorted_rating_desc));
+        //TODO to make it work we need to add a rating attribute to the client model
 
+        myapp.my_objects.collections.Items_sorted_rating_desc  = myapp.my_objects.collections.collec.clone();
         myapp.my_objects.collections.Items_sorted_rating_desc.models.sort(function(a, b){
             return b.attributes.item_rating - a.attributes.item_rating
         });
@@ -624,15 +636,16 @@ myapp.my_constructors.views.ClientListFilters = Backbone.View.extend({
         /*cleaning view before new rendering*/
         $('#clients_list').html('');
 
-        var vi4 = new myapp.my_constructors.views.ListItemContainer({
+
+        new myapp.my_constructors.views.ListItemContainer({
             el: '#clients_list',
             collection: myapp.my_objects.collections.Items_sorted_rating_desc
         });
     },
     sort_by_rating_asc: function(){
-        myapp.my_objects.collections.Items_sorted_rating_asc  = myapp.my_objects.collections.collec.clone();
-        console.log(JSON.stringify(myapp.my_objects.collections.Items_sorted_rating_asc));
+        //TODO to make it work we need to add a rating attribute to the client model
 
+        myapp.my_objects.collections.Items_sorted_rating_asc  = myapp.my_objects.collections.collec.clone();
         myapp.my_objects.collections.Items_sorted_rating_asc.models.sort(function(a, b){
             return a.attributes.item_rating - b.attributes.item_rating
         });
@@ -640,7 +653,7 @@ myapp.my_constructors.views.ClientListFilters = Backbone.View.extend({
         /*cleaning view before new rendering*/
         $('#clients_list').html('');
 
-        var vi5 = new myapp.my_constructors.views.ListItemContainer({
+        new myapp.my_constructors.views.ListItemContainer({
             el: '#clients_list',
             collection: myapp.my_objects.collections.Items_sorted_rating_asc
         });
@@ -864,6 +877,26 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
                 console.log('SUCCESS');
                 console.log(JSON.stringify(response));
 
+                myapp.my_objects.collections.ReviewsCollection = new myapp.my_constructors.collections.ReviewsCollection();
+                myapp.my_objects.collections.ReviewsCollection.fetch({
+                    reset: true,
+                    success: function(response){
+
+                        console.log('SUCCESS');
+                        console.log(JSON.stringify(response));
+
+                        myapp.my_objects.collections.ClientsCollection = AvgRatings(myapp.my_objects.collections.ClientsCollection,
+                            myapp.my_objects.collections.ReviewsCollection);
+
+
+                    },
+                    error: function(){
+                        console.log('ERROR');
+                    }
+
+                });
+
+
                 /*initializing sub-views of panel 1*/
                 new myapp.my_constructors.views.ClientListFilters({
                     el: '#clients_header'
@@ -880,19 +913,7 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         });
 
 
-        myapp.my_objects.collections.ReviewsCollection = new myapp.my_constructors.collections.ReviewsCollection();
-        myapp.my_objects.collections.ReviewsCollection.fetch({
-            reset: true,
-            success: function(response){
 
-                console.log('SUCCESS');
-                console.log(JSON.stringify(response));
-            },
-            error: function(){
-                console.log('ERROR');
-            }
-
-        });
 
 
         new myapp.my_constructors.views.Search({
@@ -900,8 +921,64 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
         });
 
 
+
+
     }
 });
+
+
+
+function AvgRatings(clients, reviews){
+
+    var clients_temp = clients.clone();
+
+    clients_temp.each(function(model){
+
+        var model_reviews = reviews.where({clientId: model.get("clientId")});
+
+        // ATTRIBUTE 1
+        var sum_1 = model_reviews.reduce(function(memo, model){
+            return memo + model.get("reviewAttr1");
+        }, 0);
+        var avg_1 = sum_1 / model_reviews.length;
+        model.set("Avg_reviewAttr1", avg_1);
+
+        // ATTRIBUTE 2
+        var sum_2 = model_reviews.reduce(function(memo, model){
+            return memo + model.get("reviewAttr2");
+        }, 0);
+        var avg_2 = sum_2 / model_reviews.length;
+        model.set("Avg_reviewAttr2", avg_2);
+
+        // ATTRIBUTE 3
+        var sum_3 = model_reviews.reduce(function(memo, model){
+            return memo + model.get("reviewAttr3");
+        }, 0);
+        var avg_3 = sum_3 / model_reviews.length;
+        model.set("Avg_reviewAttr3", avg_3);
+
+        // ATTRIBUTE 4
+        var sum_4 = model_reviews.reduce(function(memo, model){
+            return memo + model.get("reviewAttr4");
+        }, 0);
+        var avg_4 = sum_4 / model_reviews.length;
+        model.set("Avg_reviewAttr4", avg_4);
+
+        // ATTRIBUTE 5
+        var sum_5 = model_reviews.reduce(function(memo, model){
+            return memo + model.get("reviewAttr5");
+        }, 0);
+        var avg_5 = sum_5 / model_reviews.length;
+        model.set("Avg_reviewAttr5", avg_5);
+        console.log(model);
+
+    }, this);
+
+    return clients_temp;
+
+}
+
+
 
 
 
