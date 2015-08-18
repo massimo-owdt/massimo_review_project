@@ -97,9 +97,11 @@
 
 <script type="text/template" id="details_1_template">
     <div class="animated">
-        <h1><%= Avg_reviewAttr1 %></h1>
-
+        <h2 style="text-align: center">TOTAL AVERAGE</h2>
+        <h1 style="text-align: center; font-size: 4em"><%= Avg_total %></h1>
+        <h2 style="text-align: center">ATTRIBUTES AVERAGES</h2>
         <canvas id="myChart" width="400" height="300"></canvas>
+        <h2 style="text-align: center">PERFORMANCE OVER TIME AVERAGES</h2>
         <canvas id="myChart2" width="400" height="250"></canvas>
     </div>
 </script>
@@ -189,7 +191,7 @@
 </script>
 
 <script type="text/template" id="add_review_template">
-    <div class="summary">ADD NEW REVIEW for <%= item_name %></div>
+    <div class="summary">ADD NEW REVIEW</div>
 
     <div class="form_input_wrapper">
         <input name="review_title" type="text" class="form_input" placeholder="review_title"/>

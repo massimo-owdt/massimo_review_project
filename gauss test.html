@@ -7,15 +7,73 @@
 <body>
 
 
-<script src="bower_components/gauss/gauss.min.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+
 <script>
 
-    var Vector = gauss.Vector,
-            TimeSeries = gauss.TimeSeries;
-    var set = new gauss.Vector(5, 1, 3, 2, 21),
-            numbers = new Vector([8, 6, 7, 5, 3, 0, 9]);
+    var list = [
+        {
+            "reviewId": 2,
+            "reviewTitle": "test2   ",
+            "reviewDate": "Aug 12, 2015 2:47:15 PM",
+            "businessId": 5,
+            "reviewPros": "wwww",
+            "reviewCons": "qqqqq",
+            "clientId": 3,
+            "reviewAttr1": 3,
+            "reviewAttr2": 1,
+            "reviewAttr3": 1,
+            "reviewAttr4": 1,
+            "reviewAttr5": 1,
+            "reviewWatchCount": 0,
+            "reviewUsefulCount": 0,
+            "reviewNotUsefulCount": 0
+        },
+        {
+            "reviewId": 4,
+            "reviewTitle": "ggggg   ",
+            "reviewDate": "Aug 14, 2015 9:37:19 AM",
+            "businessId": 2,
+            "reviewPros": "iiiii",
+            "reviewCons": "jjjjj",
+            "clientId": 3,
+            "reviewAttr1": 5,
+            "reviewAttr2": 3,
+            "reviewAttr3": 4,
+            "reviewAttr4": 2,
+            "reviewAttr5": 4,
+            "reviewWatchCount": 9,
+            "reviewUsefulCount": 9,
+            "reviewNotUsefulCount": 9
+        }
+    ];
 
-    console.log('massimo');
+    var d = new Date(list[0].reviewDate);
+    console.log(d.getMonth());
+    var now = new Date();
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    var time_frame = [
+        monthNames[now.getMonth()-5], // m1
+        monthNames[now.getMonth()-4], // m2
+        monthNames[now.getMonth()-3], // m3
+        monthNames[now.getMonth()-2], // m4
+        monthNames[now.getMonth()-1], // m5
+        monthNames[now.getMonth()]    // m6
+    ];
+
+
+    var result = _.filter(list, function(element){
+        return new Date(element.reviewDate).getMonth() == (now.getMonth());
+    });
+
+    console.log(JSON.stringify(result));
+
+
 </script>
+
+
 </body>
 </html>

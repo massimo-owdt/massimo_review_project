@@ -160,7 +160,7 @@ myapp.my_constructors.views.SingleClient = Backbone.View.extend({
     render: function(){
         this.$el.html(this.template(this.model.toJSON()));
         this.$('.rateYo').rateYo({
-            rating: 2/*this.model.attributes.item_rating*/,
+            rating: this.model.get("Avg_total"),
             /*rating: 2.5,*/
             /*maxValue: 5,*/
             precision: 0,
@@ -197,25 +197,17 @@ myapp.my_constructors.views.SingleClient = Backbone.View.extend({
         $('#reviews_list').html('');
         $('#item_details_3').html('');
 
-        /*new myapp.my_constructors.views.ReviewListContainer({
-         el: '#reviews_list',
-         collection: myapp.my_objects.collections.ReviewsCollection
-         });*/
+        var id = this.model.get("clientId");
+        var filtered_reviews = myapp.my_objects.collections.ReviewsCollection.where({clientId: id});
+        var filt = new myapp.my_constructors.collections.ReviewsCollection();
+        filt.add(filtered_reviews);
 
-        var filtered_reviews = myapp.my_objects.collections.ReviewsCollection.clone();
-
-        filtered_reviews.each(function(review){
-
-            if (review.get("clientId") == 5){
-                filtered_reviews.remove(review);
-            }
-
-        }, this);
+        console.log(JSON.stringify(filtered_reviews));
 
 
         new myapp.my_constructors.views.ReviewListContainer({
             el: '#reviews_list',
-            collection: filtered_reviews
+            collection: filt
         });
 
         NProgress.start();
@@ -313,9 +305,9 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
                 {
                     label: "My First dataset",
                     fillColor: "rgba(0,0,0,0.1)",
-                    strokeColor: "#000000",
-                    pointColor: "#000000",
-                    pointStrokeColor: "#000000",
+                    strokeColor: "#FD8008",
+                    pointColor: "#FD8008",
+                    pointStrokeColor: "#FD8008",
                     pointHighlightFill: "#000000",
                     pointHighlightStroke: "#000000",
                     data: [
@@ -333,7 +325,7 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
 
         /*CHART #2*/
         var data2 = {
-            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "January", "February"],
+            labels: /*["January", "February", "March", "April", "May", "June"]*/ this.model.get("Months") ,
             datasets: [
                 {
                     label: "My First dataset",
@@ -343,7 +335,7 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
                     pointStrokeColor: "#000000",
                     pointHighlightFill: "#000000",
                     pointHighlightStroke: "#000000",
-                    data: [5, 4.5, 7, 6.5, 5, 5, 4.3, 5, 4.5, 6, 5, 5.7, 5, 5.5]
+                    data: this.model.get("Time_series")
                 }/*,
                  {
                  label: "My Second dataset",
@@ -380,11 +372,13 @@ myapp.my_constructors.views.SmallReview = Backbone.View.extend({
         'click .review_title': 'loadDetails'
     },
     loadDetails: function(){
-        console.log('I have been clicked');
+        /*console.log('I have been clicked');*/
         $(this.$('.review_item')).css({
             /*"background-color":"rgba(251,46,69,0.2)",*/
             "background-color":"rgba(255,212,84,0.2)"
         });
+
+        $(this.$('#item_details_3')).html("");
         new myapp.my_constructors.views.ItemDetail_3({
             el: '#item_details_3',
             model: this.model
@@ -835,8 +829,6 @@ myapp.my_constructors.views.Confused = Backbone.View.extend({
 
 
 
-
-
 /*ROUTER*/
 myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
     routes: {
@@ -888,6 +880,8 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
                         myapp.my_objects.collections.ClientsCollection = AvgRatings(myapp.my_objects.collections.ClientsCollection,
                             myapp.my_objects.collections.ReviewsCollection);
 
+                        TimeSeries();
+
 
                     },
                     error: function(){
@@ -912,21 +906,16 @@ myapp.my_constructors.router.AppRouter = Backbone.Router.extend({
 
         });
 
-
-
-
-
         new myapp.my_constructors.views.Search({
             el: '#search_area'
         });
-
-
-
 
     }
 });
 
 
+myapp.my_objects.router.APPRouter = new myapp.my_constructors.router.AppRouter;
+Backbone.history.start();
 
 function AvgRatings(clients, reviews){
 
@@ -970,22 +959,148 @@ function AvgRatings(clients, reviews){
         }, 0);
         var avg_5 = sum_5 / model_reviews.length;
         model.set("Avg_reviewAttr5", avg_5);
-        console.log(model);
+
+
+        // TOTAL RATING
+        var total_average = (avg_1 + avg_2 + avg_3 + avg_4 + avg_5) / 5;
+        model.set("Avg_total", total_average);
+        /*console.log(JSON.stringify(model));*/
+
+
+
+
+        // TEMPORAL PERFORMANCE
+
+        /*console.log("XXX" + JSON.stringify(model_reviews));*/
+        var now = new Date();
+        var monthNames = ["January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        var time_frame = [
+            monthNames[now.getMonth()-5], // m1
+            monthNames[now.getMonth()-4], // m2
+            monthNames[now.getMonth()-3], // m3
+            monthNames[now.getMonth()-2], // m4
+            monthNames[now.getMonth()-1], // m5
+            monthNames[now.getMonth()]    // m6
+        ];
+
+
+        /*MONTH 1*/
+        var reviews_m1 = model_reviews.filter(function(element){
+            return new Date(element.get("reviewDate")).getMonth() == (now.getMonth());
+        });
+        // ATTRIBUTE 1
+        var sum_m1_att1 = reviews_m1.reduce(function(memo, model){
+            return memo + model.get("reviewAttr1");
+        }, 0);
+        var avg_m1_att1 = sum_m1_att1 / reviews_m1.length;
+
+        // ATTRIBUTE 2
+        var sum_m1_att2 = reviews_m1.reduce(function(memo, model){
+            return memo + model.get("reviewAttr2");
+        }, 0);
+        var avg_m1_att2 = sum_m1_att2 / reviews_m1.length;
+
+        // ATTRIBUTE 3
+        var sum_m1_att3 = reviews_m1.reduce(function(memo, model){
+            return memo + model.get("reviewAttr3");
+        }, 0);
+        var avg_m1_att3 = sum_m1_att3 / reviews_m1.length;
+
+        // ATTRIBUTE 4
+        var sum_m1_att4 = reviews_m1.reduce(function(memo, model){
+            return memo + model.get("reviewAttr4");
+        }, 0);
+        var avg_m1_att4 = sum_m1_att4 / reviews_m1.length;
+
+        // ATTRIBUTE 5
+        var sum_m1_att5 = reviews_m1.reduce(function(memo, model){
+            return memo + model.get("reviewAttr5");
+        }, 0);
+        var avg_m1_att5 = sum_m1_att5 / reviews_m1.length;
+
+
+
+
+        /*MONTH 2*/
+        var reviews_m2 = model_reviews.filter(function(element){
+            return new Date(element.get("reviewDate")).getMonth() == (now.getMonth()-1);
+        });
+        console.log(JSON.stringify(reviews_m2));
+
+
+        /*// ATTRIBUTE 1
+        var sum_m2_att1 = reviews_m2.reduce(function(memo, model){
+            return memo + model.get("reviewAttr1");
+        }, 0);
+        var avg_m2_att1 = sum_m2_att1 / reviews_m2.length;
+
+        // ATTRIBUTE 2
+        var sum_m2_att2 = reviews_m2.reduce(function(memo, model){
+            return memo + model.get("reviewAttr2");
+        }, 0);
+        var avg_m2_att2 = sum_m2_att2 / reviews_m2.length;
+
+        // ATTRIBUTE 3
+        var sum_m2_att3 = reviews_m2.reduce(function(memo, model){
+            return memo + model.get("reviewAttr3");
+        }, 0);
+        var avg_m2_att3 = sum_m2_att3 / reviews_m2.length;
+
+        // ATTRIBUTE 4
+        var sum_m2_att4 = reviews_m2.reduce(function(memo, model){
+            return memo + model.get("reviewAttr4");
+        }, 0);
+        var avg_m2_att4 = sum_m2_att4 / reviews_m2.length;
+
+        // ATTRIBUTE 5
+        var sum_m2_att5 = reviews_m2.reduce(function(memo, model){
+            return memo + model.get("reviewAttr5");
+        }, 0);
+        var avg_m2_att5 = sum_m2_att5 / reviews_m2.length;
+*/
+
+        /*MONTH 3*/
+        var reviews_m3 = model_reviews.filter(function(element){
+            return new Date(element.get("reviewDate")).getMonth() == (now.getMonth()-2);
+        });
+        console.log(JSON.stringify(reviews_m3));
+
+
+
+
+
+
+        var avg_m1 = (avg_m1_att1 + avg_m1_att2 + avg_m1_att3 + avg_m1_att4 + avg_m1_att5) / 5;
+        var avg_m2 = 5;
+        var avg_m3 = 3;
+        var avg_m4 = 2;
+        var avg_m5 = 5;
+        var avg_m6 = 3;
+
+        model.set("Time_series", [
+            avg_m1, avg_m2, avg_m3, avg_m4, avg_m5, avg_m6
+        ]);
+
+        model.set("Months", time_frame);
+
+
+
+
+
+
 
     }, this);
 
+    console.log(JSON.stringify(clients_temp));
     return clients_temp;
-
 }
 
 
 
-
-
-
-
-
-myapp.my_objects.router.APPRouter = new myapp.my_constructors.router.AppRouter;
-Backbone.history.start();
-
+function TimeSeries(){
+    console.log('massimopenzo');
+}
 
