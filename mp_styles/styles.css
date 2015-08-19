@@ -1397,7 +1397,7 @@ canvas {
 
     /*box model*/
     margin: 0px auto 0px auto;
-   /* border: 1px dotted red;*/
+    /* border: 1px dotted red;*/
     padding: 0px 0px 0px 0px;
 
     /*decorations*/
@@ -2000,6 +2000,7 @@ img {
 }
 
 #shine {
-color: #ffffff;
+    color: #ffffff;
     font-size: 1.5em;
+    text-decoration: underline;
 }

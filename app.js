@@ -352,7 +352,7 @@ myapp.my_constructors.views.ItemDetail_1 = Backbone.View.extend({
 
         var ctx2 = document.getElementById("myChart2").getContext("2d");
         var myLineChart = new Chart(ctx2).Line(data2, {
-            bezierCurve: false
+            bezierCurve: true
         });
 
     }
