@@ -971,126 +971,292 @@ function AvgRatings(clients, reviews){
 
         // TEMPORAL PERFORMANCE
 
-        /*console.log("XXX" + JSON.stringify(model_reviews));*/
         var now = new Date();
         var monthNames = ["January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
 
         var time_frame = [
-            monthNames[now.getMonth()-5], // m1
-            monthNames[now.getMonth()-4], // m2
-            monthNames[now.getMonth()-3], // m3
-            monthNames[now.getMonth()-2], // m4
-            monthNames[now.getMonth()-1], // m5
-            monthNames[now.getMonth()]    // m6
+            monthNames[now.getMonth()-5],
+            monthNames[now.getMonth()-4],
+            monthNames[now.getMonth()-3],
+            monthNames[now.getMonth()-2],
+            monthNames[now.getMonth()-1],
+            monthNames[now.getMonth()]
         ];
 
 
-        /*MONTH 1*/
+
         var reviews_m1 = model_reviews.filter(function(element){
             return new Date(element.get("reviewDate")).getMonth() == (now.getMonth());
         });
-        // ATTRIBUTE 1
-        var sum_m1_att1 = reviews_m1.reduce(function(memo, model){
-            return memo + model.get("reviewAttr1");
-        }, 0);
-        var avg_m1_att1 = sum_m1_att1 / reviews_m1.length;
+        if (reviews_m1.length > 0) {
 
-        // ATTRIBUTE 2
-        var sum_m1_att2 = reviews_m1.reduce(function(memo, model){
-            return memo + model.get("reviewAttr2");
-        }, 0);
-        var avg_m1_att2 = sum_m1_att2 / reviews_m1.length;
-
-        // ATTRIBUTE 3
-        var sum_m1_att3 = reviews_m1.reduce(function(memo, model){
-            return memo + model.get("reviewAttr3");
-        }, 0);
-        var avg_m1_att3 = sum_m1_att3 / reviews_m1.length;
-
-        // ATTRIBUTE 4
-        var sum_m1_att4 = reviews_m1.reduce(function(memo, model){
-            return memo + model.get("reviewAttr4");
-        }, 0);
-        var avg_m1_att4 = sum_m1_att4 / reviews_m1.length;
-
-        // ATTRIBUTE 5
-        var sum_m1_att5 = reviews_m1.reduce(function(memo, model){
-            return memo + model.get("reviewAttr5");
-        }, 0);
-        var avg_m1_att5 = sum_m1_att5 / reviews_m1.length;
+            var sum_m1_att1 = reviews_m1.reduce(function(memo, model){
+                return memo + model.get("reviewAttr1");
+            }, 0);
+            var avg_m1_att1 = sum_m1_att1 / reviews_m1.length;
 
 
+            var sum_m1_att2 = reviews_m1.reduce(function(memo, model){
+                return memo + model.get("reviewAttr2");
+            }, 0);
+            var avg_m1_att2 = sum_m1_att2 / reviews_m1.length;
 
 
-        /*MONTH 2*/
+            var sum_m1_att3 = reviews_m1.reduce(function(memo, model){
+                return memo + model.get("reviewAttr3");
+            }, 0);
+            var avg_m1_att3 = sum_m1_att3 / reviews_m1.length;
+
+
+            var sum_m1_att4 = reviews_m1.reduce(function(memo, model){
+                return memo + model.get("reviewAttr4");
+            }, 0);
+            var avg_m1_att4 = sum_m1_att4 / reviews_m1.length;
+
+
+            var sum_m1_att5 = reviews_m1.reduce(function(memo, model){
+                return memo + model.get("reviewAttr5");
+            }, 0);
+            var avg_m1_att5 = sum_m1_att5 / reviews_m1.length;
+
+
+            var avg_m1 = (avg_m1_att1 + avg_m1_att2 + avg_m1_att3 + avg_m1_att4 + avg_m1_att5) / 5;
+
+        } else {
+            avg_m1 = 0;
+        }
+
+
+
+
+
+
+
         var reviews_m2 = model_reviews.filter(function(element){
             return new Date(element.get("reviewDate")).getMonth() == (now.getMonth()-1);
         });
-        console.log(JSON.stringify(reviews_m2));
+        if (reviews_m2.length > 0) {
+
+            var sum_m2_att1 = reviews_m2.reduce(function(memo, model){
+                return memo + model.get("reviewAttr1");
+            }, 0);
+            var avg_m2_att1 = sum_m2_att1 / reviews_m2.length;
 
 
-        /*// ATTRIBUTE 1
-        var sum_m2_att1 = reviews_m2.reduce(function(memo, model){
-            return memo + model.get("reviewAttr1");
-        }, 0);
-        var avg_m2_att1 = sum_m2_att1 / reviews_m2.length;
+            var sum_m2_att2 = reviews_m2.reduce(function(memo, model){
+                return memo + model.get("reviewAttr2");
+            }, 0);
+            var avg_m2_att2 = sum_m2_att2 / reviews_m2.length;
 
-        // ATTRIBUTE 2
-        var sum_m2_att2 = reviews_m2.reduce(function(memo, model){
-            return memo + model.get("reviewAttr2");
-        }, 0);
-        var avg_m2_att2 = sum_m2_att2 / reviews_m2.length;
 
-        // ATTRIBUTE 3
-        var sum_m2_att3 = reviews_m2.reduce(function(memo, model){
-            return memo + model.get("reviewAttr3");
-        }, 0);
-        var avg_m2_att3 = sum_m2_att3 / reviews_m2.length;
+            var sum_m2_att3 = reviews_m2.reduce(function(memo, model){
+                return memo + model.get("reviewAttr3");
+            }, 0);
+            var avg_m2_att3 = sum_m2_att3 / reviews_m2.length;
 
-        // ATTRIBUTE 4
-        var sum_m2_att4 = reviews_m2.reduce(function(memo, model){
-            return memo + model.get("reviewAttr4");
-        }, 0);
-        var avg_m2_att4 = sum_m2_att4 / reviews_m2.length;
 
-        // ATTRIBUTE 5
-        var sum_m2_att5 = reviews_m2.reduce(function(memo, model){
-            return memo + model.get("reviewAttr5");
-        }, 0);
-        var avg_m2_att5 = sum_m2_att5 / reviews_m2.length;
-*/
+            var sum_m2_att4 = reviews_m2.reduce(function(memo, model){
+                return memo + model.get("reviewAttr4");
+            }, 0);
+            var avg_m2_att4 = sum_m2_att4 / reviews_m2.length;
 
-        /*MONTH 3*/
+
+            var sum_m2_att5 = reviews_m2.reduce(function(memo, model){
+                return memo + model.get("reviewAttr5");
+            }, 0);
+            var avg_m2_att5 = sum_m2_att5 / reviews_m2.length;
+
+
+            var avg_m2 = (avg_m2_att1 + avg_m2_att2 + avg_m2_att3 + avg_m2_att4 + avg_m2_att5) / 5;
+
+        } else {
+            avg_m2 = 0;
+        }
+
+
+
         var reviews_m3 = model_reviews.filter(function(element){
             return new Date(element.get("reviewDate")).getMonth() == (now.getMonth()-2);
         });
-        console.log(JSON.stringify(reviews_m3));
+        if (reviews_m3.length > 0) {
+
+            var sum_m3_att1 = reviews_m3.reduce(function(memo, model){
+                return memo + model.get("reviewAttr1");
+            }, 0);
+            var avg_m3_att1 = sum_m3_att1 / reviews_m3.length;
+
+
+            var sum_m3_att2 = reviews_m3.reduce(function(memo, model){
+                return memo + model.get("reviewAttr2");
+            }, 0);
+            var avg_m3_att2 = sum_m3_att2 / reviews_m3.length;
+
+
+            var sum_m3_att3 = reviews_m3.reduce(function(memo, model){
+                return memo + model.get("reviewAttr3");
+            }, 0);
+            var avg_m3_att3 = sum_m3_att3 / reviews_m3.length;
+
+
+            var sum_m3_att4 = reviews_m3.reduce(function(memo, model){
+                return memo + model.get("reviewAttr4");
+            }, 0);
+            var avg_m3_att4 = sum_m3_att4 / reviews_m3.length;
+
+
+            var sum_m3_att5 = reviews_m3.reduce(function(memo, model){
+                return memo + model.get("reviewAttr5");
+            }, 0);
+            var avg_m3_att5 = sum_m3_att5 / reviews_m3.length;
+
+
+            var avg_m3 = (avg_m3_att1 + avg_m3_att2 + avg_m3_att3 + avg_m3_att4 + avg_m3_att5) / 5;
+
+        } else {
+            avg_m3 = 0;
+        }
+
+
+
+
+        var reviews_m4 = model_reviews.filter(function(element){
+            return new Date(element.get("reviewDate")).getMonth() == (now.getMonth()-3);
+        });
+        if (reviews_m4.length > 0) {
+
+            var sum_m4_att1 = reviews_m4.reduce(function(memo, model){
+                return memo + model.get("reviewAttr1");
+            }, 0);
+            var avg_m4_att1 = sum_m4_att1 / reviews_m4.length;
+
+
+            var sum_m4_att2 = reviews_m4.reduce(function(memo, model){
+                return memo + model.get("reviewAttr2");
+            }, 0);
+            var avg_m4_att2 = sum_m4_att2 / reviews_m4.length;
+
+
+            var sum_m4_att3 = reviews_m4.reduce(function(memo, model){
+                return memo + model.get("reviewAttr3");
+            }, 0);
+            var avg_m4_att3 = sum_m4_att3 / reviews_m4.length;
+
+
+            var sum_m4_att4 = reviews_m4.reduce(function(memo, model){
+                return memo + model.get("reviewAttr4");
+            }, 0);
+            var avg_m4_att4 = sum_m4_att4 / reviews_m4.length;
+
+
+            var sum_m4_att5 = reviews_m4.reduce(function(memo, model){
+                return memo + model.get("reviewAttr5");
+            }, 0);
+            var avg_m4_att5 = sum_m4_att5 / reviews_m4.length;
+
+
+            var avg_m4 = (avg_m4_att1 + avg_m4_att2 + avg_m4_att3 + avg_m4_att4 + avg_m4_att5) / 5;
+
+        } else {
+            avg_m4 = 0;
+        }
+
+
+
+
+        var reviews_m5 = model_reviews.filter(function(element){
+            return new Date(element.get("reviewDate")).getMonth() == (now.getMonth()-4);
+        });
+        if (reviews_m5.length > 0) {
+
+            var sum_m5_att1 = reviews_m5.reduce(function(memo, model){
+                return memo + model.get("reviewAttr1");
+            }, 0);
+            var avg_m5_att1 = sum_m5_att1 / reviews_m5.length;
+
+
+            var sum_m5_att2 = reviews_m5.reduce(function(memo, model){
+                return memo + model.get("reviewAttr2");
+            }, 0);
+            var avg_m5_att2 = sum_m5_att2 / reviews_m5.length;
+
+
+            var sum_m5_att3 = reviews_m5.reduce(function(memo, model){
+                return memo + model.get("reviewAttr3");
+            }, 0);
+            var avg_m5_att3 = sum_m5_att3 / reviews_m5.length;
+
+
+            var sum_m5_att4 = reviews_m5.reduce(function(memo, model){
+                return memo + model.get("reviewAttr4");
+            }, 0);
+            var avg_m5_att4 = sum_m5_att4 / reviews_m5.length;
+
+
+            var sum_m5_att5 = reviews_m5.reduce(function(memo, model){
+                return memo + model.get("reviewAttr5");
+            }, 0);
+            var avg_m5_att5 = sum_m5_att5 / reviews_m5.length;
+
+
+            var avg_m5 = (avg_m5_att1 + avg_m5_att2 + avg_m5_att3 + avg_m5_att4 + avg_m5_att5) / 5;
+
+        } else {
+            avg_m5 = 0;
+        }
 
 
 
 
 
 
-        var avg_m1 = (avg_m1_att1 + avg_m1_att2 + avg_m1_att3 + avg_m1_att4 + avg_m1_att5) / 5;
-        var avg_m2 = 5;
-        var avg_m3 = 3;
-        var avg_m4 = 2;
-        var avg_m5 = 5;
-        var avg_m6 = 3;
+        var reviews_m6 = model_reviews.filter(function(element){
+            return new Date(element.get("reviewDate")).getMonth() == (now.getMonth()-5);
+        });
+        if (reviews_m6.length > 0) {
+
+            var sum_m6_att1 = reviews_m6.reduce(function(memo, model){
+                return memo + model.get("reviewAttr1");
+            }, 0);
+            var avg_m6_att1 = sum_m6_att1 / reviews_m6.length;
+
+
+            var sum_m6_att2 = reviews_m6.reduce(function(memo, model){
+                return memo + model.get("reviewAttr2");
+            }, 0);
+            var avg_m6_att2 = sum_m6_att2 / reviews_m6.length;
+
+
+            var sum_m6_att3 = reviews_m6.reduce(function(memo, model){
+                return memo + model.get("reviewAttr3");
+            }, 0);
+            var avg_m6_att3 = sum_m6_att3 / reviews_m6.length;
+
+
+            var sum_m6_att4 = reviews_m6.reduce(function(memo, model){
+                return memo + model.get("reviewAttr4");
+            }, 0);
+            var avg_m6_att4 = sum_m6_att4 / reviews_m6.length;
+
+
+            var sum_m6_att5 = reviews_m6.reduce(function(memo, model){
+                return memo + model.get("reviewAttr5");
+            }, 0);
+            var avg_m6_att5 = sum_m6_att5 / reviews_m6.length;
+
+
+            var avg_m6 = (avg_m6_att1 + avg_m6_att2 + avg_m6_att3 + avg_m6_att4 + avg_m6_att5) / 5;
+
+        } else {
+            avg_m6 = 0;
+        }
 
         model.set("Time_series", [
-            avg_m1, avg_m2, avg_m3, avg_m4, avg_m5, avg_m6
+            avg_m6, avg_m5, avg_m4, avg_m3, avg_m2, avg_m1
         ]);
 
         model.set("Months", time_frame);
-
-
-
-
-
-
 
     }, this);
 
@@ -1098,9 +1264,4 @@ function AvgRatings(clients, reviews){
     return clients_temp;
 }
 
-
-
-function TimeSeries(){
-    console.log('massimopenzo');
-}
 
