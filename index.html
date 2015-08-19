@@ -15,7 +15,7 @@
 
 <body>
 <div id="header">
-    <div id="header_left"><a href="">reviews:</a></div>
+    <div id="header_left"><a href="" id="shine">reviews:</a></div>
     <div id="header_center">
         <div id="search_area"></div>
     </div>
@@ -88,7 +88,7 @@
                 <div class="rateYo"></div>
             </div>
         </div>
-        <div class="item_address"><%= clientAddress %><div class="review_count">() reviews</div></div>
+        <div class="item_address"><%= clientAddress %><!--<div class="review_count">() reviews</div>--></div>
         <div class="item_phone"><%= clientPhone %></div>
         <div class="item_email"><%= clientEmail %></div>
         <div class="item_add_review">add review </div>
@@ -332,9 +332,29 @@
 <script src="bower_components/backbone-oauth-1.0a/sha1.js"></script>
 <script src="bower_components/backbone-oauth-1.0a/backbone-oauth.js"></script>
 <script src="bower_components/fuse.js/src/fuse.min.js"></script>
+<script src="bower_components/shine/dist/shine.min.js"></script>
 <script src="oauth1.js"></script>
 <script src="app.js"></script>
+<script>
+    var config = new shinejs.Config({
+        numSteps: 8,
+        opacity: 0.2,
+        opacityPow: 1.2,
+        offset: 0.15,
+        offsetPow: 1.8,
+        blur: 40,
+        blurPow: 1.4,
+        shadowRGB: new shinejs.Color(0,0,0)
+    });
+    var shine = new Shine(document.getElementById("shine"), config);
+    window.addEventListener('mousemove', function(event) {
+        shine.light.position.x = event.clientX;
+        shine.light.position.y = event.clientY;
+        shine.draw();
+    }, false);
 
+
+</script>
 
 </body>
 </html>

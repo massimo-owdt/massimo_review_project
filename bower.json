@@ -25,6 +25,7 @@
     "nprogress": "rstacruz/nprogress#~0.2.0",
     "rateYo": "prrashi/rateYo#~2.0.1",
     "fuse.js": "krisk/Fuse#~1.2.2",
-    "gauss": "~0.2.12"
+    "gauss": "~0.2.12",
+    "shine": "~0.2.8"
   }
 }

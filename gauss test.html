@@ -6,74 +6,30 @@
 </head>
 <body>
 
+<h1 id="test" style="color: lightgray; font-size: 300px">Massimo</h1>
 
-<script src="bower_components/underscore/underscore.js"></script>
-
+<script src="bower_components/shine/dist/shine.min.js"></script>
 <script>
 
-    var list = [
-        {
-            "reviewId": 2,
-            "reviewTitle": "test2   ",
-            "reviewDate": "Aug 12, 2015 2:47:15 PM",
-            "businessId": 5,
-            "reviewPros": "wwww",
-            "reviewCons": "qqqqq",
-            "clientId": 3,
-            "reviewAttr1": 3,
-            "reviewAttr2": 1,
-            "reviewAttr3": 1,
-            "reviewAttr4": 1,
-            "reviewAttr5": 1,
-            "reviewWatchCount": 0,
-            "reviewUsefulCount": 0,
-            "reviewNotUsefulCount": 0
-        },
-        {
-            "reviewId": 4,
-            "reviewTitle": "ggggg   ",
-            "reviewDate": "Aug 14, 2015 9:37:19 AM",
-            "businessId": 2,
-            "reviewPros": "iiiii",
-            "reviewCons": "jjjjj",
-            "clientId": 3,
-            "reviewAttr1": 5,
-            "reviewAttr2": 3,
-            "reviewAttr3": 4,
-            "reviewAttr4": 2,
-            "reviewAttr5": 4,
-            "reviewWatchCount": 9,
-            "reviewUsefulCount": 9,
-            "reviewNotUsefulCount": 9
-        }
-    ];
-
-    var d = new Date(list[0].reviewDate);
-    console.log(d.getMonth());
-    var now = new Date();
-    var monthNames = ["January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    ];
-
-    var time_frame = [
-        monthNames[now.getMonth()-5], // m1
-        monthNames[now.getMonth()-4], // m2
-        monthNames[now.getMonth()-3], // m3
-        monthNames[now.getMonth()-2], // m4
-        monthNames[now.getMonth()-1], // m5
-        monthNames[now.getMonth()]    // m6
-    ];
-
-
-    var result = _.filter(list, function(element){
-        return new Date(element.reviewDate).getMonth() == (now.getMonth());
+    var config = new shinejs.Config({
+        numSteps: 10,
+        opacity: 0.2,
+        opacityPow: 1.2,
+        offset: 0.15,
+        offsetPow: 1.8,
+        blur: 40,
+        blurPow: 1.4,
+        shadowRGB: new shinejs.Color(255, 19, 19)
     });
-
-    console.log(JSON.stringify(result));
+    var shine = new Shine(document.getElementById("test"), config);
+    window.addEventListener('mousemove', function(event) {
+        shine.light.position.x = event.clientX;
+        shine.light.position.y = event.clientY;
+        shine.draw();
+    }, false);
 
 
 </script>
-
 
 </body>
 </html>
